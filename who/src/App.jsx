@@ -4,6 +4,7 @@ import Start from './pages/Start'
 import Incidentscene from './pages/Incidentscene'
 import InputName from './pages/InputName'
 import Evidence from './pages/Evidence'
+import SuspectBoard from './pages/SuspectBoard'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/incidentscene" element={<Incidentscene />} />
         <Route path="/inputname" element={<InputName />} />
         <Route path="/evidence" element={<Evidence />} />
+        <Route path="/suspectboard" element={<SuspectBoard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

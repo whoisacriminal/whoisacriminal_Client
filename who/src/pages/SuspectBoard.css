@@ -1,0 +1,232 @@
+@font-face {
+  font-family: "Joseon100Years";
+  src: url("https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+.suspect-board {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  padding: 42px 0 34px;
+  overflow: hidden;
+  isolation: isolate;
+  color: #050505;
+  background: #FEFAF7;
+  font-family: "Joseon100Years", "Noto Sans KR", sans-serif;
+}
+
+.suspect-board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: url("../assets/background/bg-film.png") center / cover no-repeat;
+  opacity: 0.78;
+}
+
+.center-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 5;
+  width: 3px;
+  background: #050505;
+  transform: translateX(-50%);
+}
+
+.board-header {
+  position: relative;
+  z-index: 10;
+  width: 390px;
+  margin: 20px 0 14px calc(25% - 165px);
+  text-align: center;
+}
+
+.board-header h1,
+.board-header h2 {
+  margin: 0;
+  color: #050505;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.board-header h1 {
+  font-size: clamp(2.1rem, 2.5vw, 2.65rem);
+}
+
+.board-header h2 {
+  margin-top: 2px;
+  font-size: clamp(2.1rem, 2.55vw, 2.7rem);
+}
+
+.top-secret-stamp {
+  position: absolute;
+  top: -1px;
+  left: 2px;
+  z-index: 12;
+  display: block;
+  width: 360px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.coffee-ring {
+  position: absolute;
+  top: 32.5%;
+  right: -76px;
+  z-index: 11;
+  width: min(28vw, 330px);
+  aspect-ratio: 315 / 579;
+  pointer-events: none;
+  background: url("../assets/background/coffee-circle.png") center / contain no-repeat;
+}
+
+.suspect-grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 28px;
+  width: 100%;
+  margin-top: 85px;
+}
+
+.suspect-card {
+  display: grid;
+  grid-template-columns: 238px minmax(360px, 1fr);
+  align-items: start;
+  min-height: 310px;
+}
+
+.photo-frame {
+  box-sizing: border-box;
+  width: 224px;
+  height: 310px;
+  margin-left: 14px;
+  padding: 14px 10px 32px;
+  background: rgba(191, 191, 191, 0.58);
+}
+
+.suspect-photo {
+  display: block;
+  width: 204px;
+  height: 264px;
+  object-fit: cover;
+}
+
+.suspect-table {
+  width: 100%;
+  margin-top: 31px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: transparent;
+}
+
+.suspect-table th,
+.suspect-table td {
+  height: 54px;
+  box-sizing: border-box;
+  border: 2px solid #050505;
+  padding: 0 22px;
+  color: #050505;
+  font-size: clamp(0.98rem, 1.12vw, 1.16rem);
+  font-weight: 700;
+  line-height: 1.3;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.suspect-table th {
+  width: 92px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.suspect-table td {
+  text-align: left;
+}
+
+@media (max-width: 1180px) {
+  .suspect-board {
+    height: auto;
+    min-height: 100svh;
+    padding: 48px 18px 56px;
+  }
+
+  .center-divider {
+    display: none;
+  }
+
+  .board-header {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .suspect-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .coffee-ring {
+    top: 58%;
+    right: -120px;
+    width: min(46vw, 320px);
+  }
+}
+
+@media (max-width: 720px) {
+  .suspect-board {
+    height: auto;
+    min-height: 100svh;
+    padding: 36px 12px 42px;
+  }
+
+  .board-header {
+    width: auto;
+    margin-bottom: 28px;
+  }
+
+  .board-header h1,
+  .board-header h2 {
+    font-size: 2rem;
+  }
+
+  .top-secret-stamp {
+    top: -1px;
+    left: 4px;
+    width: min(58vw, 260px);
+  }
+
+  .suspect-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    min-height: 0;
+  }
+
+  .photo-frame {
+    margin-left: 0;
+  }
+
+  .suspect-table {
+    margin-top: 0;
+  }
+
+  .suspect-table th,
+  .suspect-table td {
+    height: 52px;
+    padding: 0 12px;
+    font-size: 0.92rem;
+    white-space: normal;
+  }
+}
