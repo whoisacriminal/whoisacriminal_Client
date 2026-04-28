@@ -8,21 +8,7 @@ import marker2 from '../assets/intro/marker2.png'
 import marker3 from '../assets/intro/marker3.png'
 import laptop from '../assets/intro/laptop.png'
 
-const STAGE_WIDTH = 1440
-const STAGE_HEIGHT = 1024
-
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
-
-function getInitialScale() {
-	if (typeof window === 'undefined') {
-		return 1
-	}
-
-	const widthScale = window.innerWidth / STAGE_WIDTH
-	const heightScale = window.innerHeight / STAGE_HEIGHT
-
-	return Math.min(widthScale, heightScale)
-}
 
 function DecorativeAsset({ className, floatClass, src, alt, style }) {
 	return (
@@ -37,7 +23,6 @@ function DecorativeAsset({ className, floatClass, src, alt, style }) {
 function Intro({ onPlay }) {
 	const shellRef = useRef(null)
 	const pressTimeoutRef = useRef(null)
-	const [stageScale, setStageScale] = useState(() => getInitialScale())
 	const [isReady, setIsReady] = useState(false)
 	const [isPressed, setIsPressed] = useState(false)
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
@@ -57,21 +42,6 @@ function Intro({ onPlay }) {
 		media.addListener(updateMotionPreference)
 
 		return () => media.removeListener(updateMotionPreference)
-	}, [])
-
-	useEffect(() => {
-		const updateScale = () => {
-			const widthScale = window.innerWidth / STAGE_WIDTH
-			const heightScale = window.innerHeight / STAGE_HEIGHT
-			const nextScale = Math.min(widthScale, heightScale)
-
-			setStageScale(Number.isFinite(nextScale) && nextScale > 0 ? nextScale : 1)
-		}
-
-		updateScale()
-		window.addEventListener('resize', updateScale, { passive: true })
-
-		return () => window.removeEventListener('resize', updateScale)
 	}, [])
 
 	useEffect(() => {
@@ -147,7 +117,6 @@ function Intro({ onPlay }) {
 			ref={shellRef}
 			className={stageClassName}
 			style={{
-				'--stage-scale': `${stageScale}`,
 				'--intro-backdrop': `url(${bgMain})`,
 			}}
 			onPointerMove={updateParallax}
