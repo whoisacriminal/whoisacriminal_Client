@@ -1,9 +1,10 @@
 import "./SuspectBoard.css";
-import dongchangPhoto from "../assets/suspect/dongchang.png";
-import sarangPhoto from "../assets/suspect/sarang.png";
-import teamwonPhoto from "../assets/suspect/teamwon.png";
+import dongchang from "../assets/suspect/dongchang.png";
+import sarang from "../assets/suspect/sarang.png";
+import teamwon from "../assets/suspect/teamwon.png";
+import coffeeStain from "../assets/background/coffee-stain.png";
 import topsecretStamp from "../assets/background/topsecret.png";
-import yideungPhoto from "../assets/suspect/yideung.png";
+import yideung from "../assets/suspect/yideung.png";
 
 const suspects = [
   {
@@ -12,7 +13,7 @@ const suspects = [
     age: "19살",
     school: "미림마이스터고등학교",
     trait: "피해자와 같이 IT쇼를 준비하는 학생",
-    image: teamwonPhoto,
+    image: teamwon,
   },
   {
     id: 3,
@@ -20,7 +21,7 @@ const suspects = [
     age: "19살",
     school: "미림마이스터고등학교",
     trait: "피해자와 같은 중학교 출신",
-    image: dongchangPhoto,
+    image: dongchang,
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ const suspects = [
     age: "19살",
     school: "미림마이스터고등학교",
     trait: "미림마이스터고 소프트웨어과 전교 2등",
-    image: yideungPhoto,
+    image: yideung,
   },
   {
     id: 4,
@@ -36,7 +37,7 @@ const suspects = [
     age: "19살",
     school: "미림마이스터고등학교",
     trait: "피해자와 같은 반 학생",
-    image: sarangPhoto,
+    image: sarang,
   },
 ];
 
@@ -81,6 +82,7 @@ export default function SuspectBoard() {
       <div className="center-divider" />
       <div className="coffee-ring" />
 
+      <img className="coffee-stain" src={coffeeStain} alt="" aria-hidden="true" draggable="false" />
       <img className="top-secret-stamp" src={topsecretStamp} alt="" aria-hidden="true" draggable="false" />
 
       <header className="board-header">
