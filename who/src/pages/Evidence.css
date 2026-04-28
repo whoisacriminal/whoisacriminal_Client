@@ -1,0 +1,486 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.evidence-shell {
+  --evidence-bg: none;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  justify-content: center;
+  padding: clamp(18px, 2.2vw, 28px);
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(4, 8, 7, 0.14) 0%, rgba(3, 4, 3, 0.26) 100%),
+    var(--evidence-bg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.evidence-stage {
+  position: relative;
+  width: min(1200px, 100%);
+  aspect-ratio: 1200 / 850;
+  min-height: min(850px, 100svh - 40px);
+}
+
+.evidence-title,
+.evidence-outline,
+.evidence-marker,
+.evidence-photo,
+.evidence-start-button {
+  opacity: 0;
+  translate: 0 22px;
+  transition:
+    opacity 620ms ease,
+    translate 760ms cubic-bezier(0.17, 0.84, 0.44, 1);
+}
+
+.evidence-shell.is-mounted .evidence-title,
+.evidence-shell.is-mounted .evidence-outline,
+.evidence-shell.is-mounted .evidence-marker,
+.evidence-shell.is-mounted .evidence-photo,
+.evidence-shell.is-mounted .evidence-start-button {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.evidence-shell.is-mounted .evidence-title {
+  transition-delay: 80ms;
+}
+
+.evidence-shell.is-mounted .evidence-outline {
+  transition-delay: 150ms;
+}
+
+.evidence-shell.is-mounted .evidence-marker--1 {
+  transition-delay: 240ms;
+}
+
+.evidence-shell.is-mounted .evidence-marker--2 {
+  transition-delay: 300ms;
+}
+
+.evidence-shell.is-mounted .evidence-marker--3 {
+  transition-delay: 360ms;
+}
+
+.evidence-shell.is-mounted .evidence-photo--1 {
+  transition-delay: 280ms;
+}
+
+.evidence-shell.is-mounted .evidence-photo--2 {
+  transition-delay: 340ms;
+}
+
+.evidence-shell.is-mounted .evidence-photo--3 {
+  transition-delay: 400ms;
+}
+
+.evidence-shell.is-mounted .evidence-start-button {
+  transition-delay: 500ms;
+}
+
+.evidence-title {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Joseon100Years', serif;
+  font-size: 50px;
+  text-align: center;
+  white-space: nowrap;
+  color: #f5f0e6;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.evidence-outline {
+  position: absolute;
+  left: 50%;
+  top: 56.8%;
+  width: 650px;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.evidence-marker {
+  position: absolute;
+  width: clamp(72px, 8.8%, 120px);
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.28));
+}
+
+.evidence-marker--1 {
+  left: 64%;
+  top: 25%;
+  transform: rotate(-5deg);
+}
+
+.evidence-marker--2 {
+  left: 54.8%;
+  top: 70.6%;
+  transform: rotate(-3deg);
+}
+
+.evidence-marker--3 {
+  left: 20.7%;
+  top: 47.5%;
+  transform: rotate(5deg);
+}
+
+.evidence-photo {
+  position: absolute;
+  margin: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: help;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.28));
+  z-index: 5;
+  outline: none;
+}
+
+.evidence-photo:focus-visible {
+  filter:
+    drop-shadow(0 8px 14px rgba(0, 0, 0, 0.32))
+    drop-shadow(0 0 0 rgba(255, 255, 255, 0.28));
+}
+
+.evidence-img {
+  display: block;
+  width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+  animation: evidence-float 8.6s ease-in-out infinite;
+}
+
+.evidence-photo--1 .evidence-img {
+  animation-duration: 9.2s;
+  animation-delay: -1.2s;
+}
+
+.evidence-photo--2 .evidence-img {
+  animation-duration: 8.1s;
+  animation-delay: -3.6s;
+}
+
+.evidence-photo--3 .evidence-img {
+  animation-duration: 9.8s;
+  animation-delay: -2.4s;
+}
+
+@keyframes evidence-float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.evidence-photo--1 {
+  left: 82%;
+  top: 15%;
+  width: clamp(150px, 18%, 230px);
+}
+
+.evidence-photo--2 {
+  left: 70%;
+  top: 70.6%;
+  width: clamp(150px, 20%, 220px);
+}
+
+.evidence-photo--3 {
+  left: -6%;
+  top: 40%;
+  width: clamp(120px, 20%, 200px);
+}
+
+.evidence-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  width: clamp(180px, 26vw, 300px);
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(5, 12, 10, 0.96) 0%, rgba(3, 7, 6, 0.96) 100%);
+  color: #f3efe5;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.36);
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 220ms ease;
+  z-index: 8;
+}
+
+.evidence-tooltip--left {
+  left: auto;
+  right: calc(100% + 12px);
+  bottom: 10%;
+  transform: translate(8px, 0);
+}
+
+.evidence-tooltip--right {
+  left: calc(100% + 12px);
+  bottom: 8%;
+  transform: translate(-8px, 0);
+}
+
+.evidence-photo:hover .evidence-tooltip,
+.evidence-photo:focus-within .evidence-tooltip,
+.evidence-photo:focus-visible .evidence-tooltip {
+  opacity: 1;
+}
+
+.evidence-photo:hover .evidence-tooltip {
+  transform: translate(-50%, 0);
+}
+
+.evidence-photo:hover .evidence-tooltip--left,
+.evidence-photo:focus-within .evidence-tooltip--left,
+.evidence-photo:focus-visible .evidence-tooltip--left {
+  transform: translate(0, 0);
+}
+
+.evidence-photo:hover .evidence-tooltip--right,
+.evidence-photo:focus-within .evidence-tooltip--right,
+.evidence-photo:focus-visible .evidence-tooltip--right {
+  transform: translate(0, 0);
+}
+
+.evidence-tooltip-title {
+  display: block;
+  margin-bottom: 6px;
+  font-family: 'Joseon100Years', serif;
+  font-size: 18px;
+  line-height: 1.05;
+  color: #fff8df;
+}
+
+.evidence-tooltip-text {
+  display: block;
+  font-family: 'Joseon100Years', serif;
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.evidence-start-button {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(60px, 10vh, 90px);
+  transform: translateX(-50%);
+  min-width: 152px;
+  padding: 13px 28px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.46) 0%, rgba(5, 5, 5, 0.3) 100%);
+  color: #f5f0e8;
+  font-family: 'Joseon100Years', serif;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.24);
+  transition:
+    opacity 620ms ease,
+    translate 760ms cubic-bezier(0.17, 0.84, 0.44, 1),
+    transform 180ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease,
+    filter 220ms ease;
+}
+
+.evidence-start-button::before {
+  content: '';
+  position: absolute;
+  inset: -30% auto -30% -56%;
+  width: 152px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0.1) 65%,
+    transparent 100%
+  );
+  transform: translateX(-170%) skewX(-18deg);
+  transition: transform 800ms ease;
+  pointer-events: none;
+}
+
+.evidence-start-button::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 85, 85, 0);
+  opacity: 0;
+  box-shadow: 0 0 0 0 rgba(255, 76, 76, 0);
+  transition:
+    opacity 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  pointer-events: none;
+}
+
+.evidence-start-button:hover {
+  border-color: rgba(255, 255, 255, 0.54);
+  background: linear-gradient(180deg, rgba(24, 24, 24, 0.62) 0%, rgba(8, 8, 8, 0.44) 100%);
+  color: #fffdf8;
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.3),
+    0 0 16px rgba(154, 41, 41, 0.08);
+  filter: brightness(1.04);
+}
+
+.evidence-start-button:hover::before {
+  transform: translateX(520%) skewX(-18deg);
+}
+
+.evidence-start-button:hover::after {
+  opacity: 1;
+  border-color: rgba(255, 94, 94, 0.26);
+  box-shadow:
+    0 0 0 1px rgba(255, 94, 94, 0.08),
+    0 0 18px rgba(255, 82, 82, 0.12);
+}
+
+.evidence-start-button:active {
+  transform: translateX(-50%) translateY(2px) scale(0.985);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+}
+
+.evidence-start-button:focus-visible {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 0 0 4px rgba(255, 74, 74, 0.12),
+    0 16px 24px rgba(0, 0, 0, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-title,
+  .evidence-outline,
+  .evidence-marker,
+  .evidence-photo,
+  .evidence-start-button {
+    transition-duration: 1ms;
+    translate: 0 0;
+  }
+
+  .evidence-img {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .evidence-stage {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    min-height: min(100svh - 24px, 900px);
+  }
+
+  .evidence-title {
+    top: 10.5%;
+    font-size: clamp(24px, 7vw, 40px);
+    white-space: normal;
+    line-height: 1.15;
+    padding: 0 20px;
+  }
+
+  .evidence-outline {
+    top: 52%;
+    width: clamp(210px, 41%, 320px);
+  }
+
+  .evidence-marker {
+    width: clamp(64px, 12%, 104px);
+  }
+
+  .evidence-marker--1 {
+    left: 63%;
+    top: 37%;
+  }
+
+  .evidence-marker--2 {
+    left: 55%;
+    top: 66%;
+  }
+
+  .evidence-marker--3 {
+    left: 20%;
+    top: 45%;
+  }
+
+  .evidence-photo--1 {
+    left: 78%;
+    top: 16%;
+    width: clamp(120px, 28%, 180px);
+  }
+
+  .evidence-photo--2 {
+    left: 62%;
+    top: 70%;
+    width: clamp(120px, 28%, 180px);
+  }
+
+  .evidence-photo--3 {
+    left: -2%;
+    top: 42%;
+    width: clamp(110px, 26%, 168px);
+  }
+
+  .evidence-tooltip {
+    width: min(240px, 62vw);
+    padding: 10px 12px;
+  }
+
+  .evidence-tooltip--left {
+    right: auto;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 8px);
+  }
+
+  .evidence-tooltip--right {
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 8px);
+  }
+
+  .evidence-photo:hover .evidence-tooltip--left,
+  .evidence-photo:focus-within .evidence-tooltip--left,
+  .evidence-photo:focus-visible .evidence-tooltip--left,
+  .evidence-photo:hover .evidence-tooltip--right,
+  .evidence-photo:focus-within .evidence-tooltip--right,
+  .evidence-photo:focus-visible .evidence-tooltip--right {
+    transform: translate(-50%, 0);
+  }
+
+  .evidence-start-button {
+    bottom: 14px;
+  }
+}
