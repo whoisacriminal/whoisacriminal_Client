@@ -3,6 +3,7 @@ import Intro from './pages/Intro'
 import Start from './pages/Start'
 import Incidentscene from './pages/Incidentscene'
 import InputName from './pages/InputName'
+import Evidence from './pages/Evidence'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/start" element={<StartRoute />} />
         <Route path="/incidentscene" element={<Incidentscene />} />
         <Route path="/inputname" element={<InputName />} />
+        <Route path="/evidence" element={<Evidence />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

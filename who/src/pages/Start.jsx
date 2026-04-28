@@ -221,6 +221,7 @@ function Start({ onInvestigate, onSkip }) {
     if (typeof onInvestigate === 'function') {
       onInvestigate()
     }
+    navigation.navigate('/evidence')
   }
 
   const handleSkip = () => {
@@ -254,74 +255,79 @@ function Start({ onInvestigate, onSkip }) {
         <img className="start-background" src={bgMain} alt="" aria-hidden="true" draggable="false" />
         <div className="start-vignette" aria-hidden="true" />
 
-        <DecorativeAsset
-          className="start-handcuffs"
-          floatClass="float-handcuffs"
-          src={handcuffs}
-          alt=""
-          style={{
-            '--enter-delay': '120ms',
-            '--parallax-x': '10px',
-            '--parallax-y': '8px',
-            '--hover-scale': '1.04',
-            '--tilt': '-11deg',
-          }}
-        />
-
-        <div className="filechart-wrap">
-          <img className="filechart" src={filechart} alt="" aria-hidden="true" draggable="false" />
-
-          <div className="case-sheet" aria-label="Victim case table">
-            <table className="case-table">
-              <tbody>
-                {CASE_ROWS.map((row, rowIndex) => {
-                  const rowText = typedRows[rowIndex] ?? ''
-                  const isActive = rowIndex === activeRowIndex
-                  const isComplete = rowText.length === row.value.length
-
-                  return (
-                    <tr
-                      key={row.label}
-                      className={`case-row ${isActive ? 'is-active' : ''} ${rowIndex === CASE_ROWS.length - 1 ? 'is-note' : ''}`}
-                    >
-                      <th scope="row" className="case-label">
-                        <span className="case-label-text">{row.label}</span>
-                      </th>
-                      <td className={`case-value ${rowIndex === CASE_ROWS.length - 1 ? 'is-note' : ''}`}>
-                        <span className="case-text" aria-live={isActive ? 'polite' : 'off'}>
-                          {rowText}
-                        </span>
-                        {isActive && !isComplete ? <span className="typing-cursor" aria-hidden="true" /> : null}
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+        <div className="start-content">
+          <DecorativeAsset
+            className="start-handcuffs"
+            floatClass="float-handcuffs"
+            src={handcuffs}
+            alt=""
+            style={{
+              '--enter-delay': '120ms',
+              '--parallax-x': '10px',
+              '--parallax-y': '8px',
+              '--hover-scale': '1.04',
+              '--tilt': '-11deg',
+            }}
+          />
+          <div className="title">
+            <p>사건 번호 01</p>
+            <h1>실습실 살인사건</h1>
           </div>
-        </div>
+          <div className="filechart-wrap">
+            <img className="filechart" src={filechart} alt="" aria-hidden="true" draggable="false" />
 
-        <DecorativeAsset
-          className="start-handprint"
-          floatClass="float-handprint"
-          src={handpring}
-          alt=""
-          style={{
-            '--enter-delay': '180ms',
-            '--parallax-x': '12px',
-            '--parallax-y': '10px',
-            '--hover-scale': '1.04',
-            '--tilt': '13deg',
-          }}
-        />
+            <div className="case-sheet" aria-label="Victim case table">
+              <table className="case-table">
+                <tbody>
+                  {CASE_ROWS.map((row, rowIndex) => {
+                    const rowText = typedRows[rowIndex] ?? ''
+                    const isActive = rowIndex === activeRowIndex
+                    const isComplete = rowText.length === row.value.length
 
-        <div className="start-actions" aria-label="Start actions">
-          <button type="button" className="start-action start-action--primary" onClick={handleInvestigate}>
-            조사하기
-          </button>
-          <button type="button" className="start-action start-action--secondary" onClick={handleSkip}>
-            건너뛰기
-          </button>
+                    return (
+                      <tr
+                        key={row.label}
+                        className={`case-row ${isActive ? 'is-active' : ''} ${rowIndex === CASE_ROWS.length - 1 ? 'is-note' : ''}`}
+                      >
+                        <th scope="row" className="case-label">
+                          <span className="case-label-text">{row.label}</span>
+                        </th>
+                        <td className={`case-value ${rowIndex === CASE_ROWS.length - 1 ? 'is-note' : ''}`}>
+                          <span className="case-text" aria-live={isActive ? 'polite' : 'off'}>
+                            {rowText}
+                          </span>
+                          {isActive && !isComplete ? <span className="typing-cursor" aria-hidden="true" /> : null}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <DecorativeAsset
+            className="start-handprint"
+            floatClass="float-handprint"
+            src={handpring}
+            alt=""
+            style={{
+              '--enter-delay': '180ms',
+              '--parallax-x': '12px',
+              '--parallax-y': '10px',
+              '--hover-scale': '1.04',
+              '--tilt': '13deg',
+            }}
+          />
+
+          <div className="start-actions" aria-label="Start actions">
+            <button type="button" className="start-action start-action--primary" onClick={handleInvestigate}>
+              조사하기
+            </button>
+            <button type="button" className="start-action start-action--secondary" onClick={handleSkip}>
+              건너뛰기
+            </button>
+          </div>
         </div>
       </section>
     </main>
