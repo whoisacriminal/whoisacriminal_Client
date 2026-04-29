@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Start.css'
+import NoirButton from '../components/NoirButton'
 import bgMain from '../assets/start/bg-main.png'
 import filechart from '../assets/start/filechart.png'
 import handcuffs from '../assets/start/handcuffs.png'
@@ -321,12 +322,12 @@ function Start({ onInvestigate, onSkip }) {
           />
 
           <div className="start-actions" aria-label="Start actions">
-            <button type="button" className="start-action start-action--primary" onClick={handleInvestigate}>
+            <NoirButton type="button" onClick={handleInvestigate}>
               조사하기
-            </button>
-            <button type="button" className="start-action start-action--secondary" onClick={handleSkip}>
+            </NoirButton>
+            <NoirButton type="button" variant="secondary" onClick={handleSkip}>
               건너뛰기
-            </button>
+            </NoirButton>
           </div>
         </div>
       </section>

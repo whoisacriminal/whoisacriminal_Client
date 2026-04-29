@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import bg from '../assets/background/bg-blackboard.png'
 import './Evidence.css'
+import NoirButton from '../components/NoirButton'
 import Line from '../assets/enidence/line.svg'
 import no1 from '../assets/enidence/no1.png'
 import no2 from '../assets/enidence/no2.png'
@@ -40,7 +41,7 @@ export default function Evidence() {
           <img src={evidence_no1} alt="증거 사진 1" className="evidence-img" />
           <figcaption className="evidence-tooltip evidence-tooltip--left">
             <strong className="evidence-tooltip-title">증거 1</strong>
-            <span className="evidence-tooltip-text">피해자 노트북. 전원이 켜진 채로 발견되어 마지막 작업 기록 확인이 필요함.</span>
+            <span className="evidence-tooltip-text">피해자 에너지 드링크 : 살해 전까지 마시던 에너지 드링크. 바닥에 떨어져 있다.</span>
           </figcaption>
         </figure>
 
@@ -48,7 +49,7 @@ export default function Evidence() {
           <img src={evidence_no2} alt="증거 사진 2" className="evidence-img" />
           <figcaption className="evidence-tooltip evidence-tooltip--left">
             <strong className="evidence-tooltip-title">증거 2</strong>
-            <span className="evidence-tooltip-text">피해자 휴대폰. 통화 및 메시지 내역에서 사건 직전 동선 단서 확보 가능.</span>
+            <span className="evidence-tooltip-text">피해자 : 뒷통수를 가격 당한 후 쓰러져 있다.</span>
           </figcaption>
         </figure>
 
@@ -56,13 +57,13 @@ export default function Evidence() {
           <img src={evidence_no3} alt="증거 사진 3" className="evidence-img" />
           <figcaption className="evidence-tooltip evidence-tooltip--right">
             <strong className="evidence-tooltip-title">증거 3</strong>
-            <span className="evidence-tooltip-text">혈흔이 묻은 둔기 추정 물체. 지문 및 DNA 감정을 통해 용의자 특정 가능.</span>
+            <span className="evidence-tooltip-text">피가 묻은 휴지 : 피 묻은 휴지가 휴지통에 잔뜩 버러져 있다. 현장 조작의 증거로 보인다.</span>
           </figcaption>
         </figure>
       </section>
-      <button type="button" className="evidence-start-button" onClick={() => navigate('/investigation')}>
-        조사 시작
-      </button>
+      <NoirButton type="button" className="evidence-start-button" onClick={() => navigate('/investigation')}>
+        용의자 보러 가기
+      </NoirButton>
     </main>
   )
 }
