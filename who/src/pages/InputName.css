@@ -1,0 +1,113 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.inputname-shell {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(180deg, rgba(10, 12, 11, 0.65) 0%, rgba(4, 4, 4, 0.82) 100%),
+    var(--backdrop-image, none);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: #f5f0e6;
+}
+
+.inputname-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.inputname-title {
+  text-align: center;
+  font-family: 'Joseon100Years', serif;
+  font-size: 36px;
+  line-height: 1.55;
+  color: #f5f0e8;
+  min-height: 2.8em;
+}
+
+.inputname-title p {
+  margin: 0;
+}
+
+.inputname-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.1em;
+  background: rgba(245, 240, 232, 0.9);
+  animation: inputname-blink 1.02s steps(1) infinite;
+}
+
+.inputname-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms ease,
+    transform 700ms cubic-bezier(0.17, 0.84, 0.44, 1);
+  pointer-events: none;
+}
+
+.inputname-form.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.inputname-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.inputname-label {
+  font-family: 'Joseon100Years', serif;
+  font-size: 40px;
+  color: #f5f0e8;
+  white-space: nowrap;
+}
+
+.inputname-input {
+  width: 480px;
+  height: 80px;
+  padding: 0 16px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  color: #f5f0e8;
+  font-family: 'Joseon100Years', serif;
+  font-size: 20px;
+  outline: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.inputname-input:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+
+@keyframes inputname-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
