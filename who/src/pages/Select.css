@@ -24,17 +24,37 @@
   -webkit-user-drag: none;
 }
 
-.select-desk-btn {
-  --font-family: 'Joseon100Years';
+.select-notice {
+  position: absolute;
+  right: 20%;
+  top: 8%;
+  padding: 14px  90px;
+  background: rgba(20, 20, 20, 0.72);
+  border-radius: 12px;
+  font-family: 'Joseon100Years', serif;
+  font-size: 30px;
+  line-height: 1.7;
+  color: #f5f0e8;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.select-desk-wrap {
   position: absolute;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+}
+
+.select-desk-btn {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   border: none;
   background: rgba(0, 0, 0, 0.55);
@@ -47,25 +67,26 @@
 }
 
 .select-desk-btn:hover {
-  background: rgba(0, 0, 0, 0.72);
-  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.1);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .select-desk-btn:active {
-  transform: translate(-50%, -50%) scale(0.97);
+  transform: scale(0.95);
 }
 
 .select-desk-plus {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 300;
   line-height: 1;
-  letter-spacing: 0;
 }
 
 .select-desk-label {
-  font-size: 13px;
-  line-height: 1.3;
+  font-family: 'Joseon100Years', serif;
+  font-size: 20px;
+  color: #f5f0e8;
   text-align: center;
   white-space: nowrap;
+  pointer-events: none;
 }
