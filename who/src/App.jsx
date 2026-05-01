@@ -6,6 +6,7 @@ import InputName from './pages/InputName'
 import Evidence from './pages/Evidence'
 import SuspectBoard from './pages/SuspectBoard'
 import Select from './pages/Select'
+import Desk from './pages/Desk'
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         <Route path="/inputname" element={<InputName />} />
         <Route path="/evidence" element={<Evidence />} />
         <Route path="/suspectboard" element={<SuspectBoard />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/select" element={<Select />} />
+        <Route path="/suspect/:id" element={<Desk />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )
