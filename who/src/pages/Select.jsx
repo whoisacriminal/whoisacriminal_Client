@@ -30,7 +30,7 @@ export default function Select() {
           <button
             type="button"
             className="select-desk-btn"
-            onClick={() => navigate(`/suspect/${desk.id}`)}
+            onClick={() => navigate('/selectevidence', { state: desk })}
             aria-label={`${desk.name}의 책상 조사하기`}
           >
             <span className="select-desk-plus">+</span>

@@ -7,6 +7,7 @@ import Evidence from './pages/Evidence'
 import SuspectBoard from './pages/SuspectBoard'
 import Select from './pages/Select'
 import QuestionSelect from './pages/QuestionSelect'
+import SelectEvidence from './pages/SelectEvidence'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/select" element={<Select />} />
         <Route path="/questionselect" element={<QuestionSelect />} />
+        <Route path="/selectevidence" element={<SelectEvidence />} />
       </Routes>
     </BrowserRouter>
   )
