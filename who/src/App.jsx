@@ -8,6 +8,10 @@ import SuspectBoard from './pages/SuspectBoard'
 import Select from './pages/Select'
 import QuestionSelect from './pages/QuestionSelect'
 import SelectEvidence from './pages/SelectEvidence'
+import QuestionYideung from './pages/QuestionYideung'
+import QuestionTeamwon from './pages/QuestionTeamwon'
+import QuestionSarang from './pages/QuestionSarang'
+import QuestionDongchang from './pages/QuestionDongchang'
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
         <Route path="/select" element={<Select />} />
         <Route path="/questionselect" element={<QuestionSelect />} />
         <Route path="/selectevidence" element={<SelectEvidence />} />
+        <Route path="/yideungquestion" element={<QuestionYideung />} />
+        <Route path="/teamwonquestion" element={<QuestionTeamwon />} />
+        <Route path="/sarangquestion" element={<QuestionSarang />} />
+        <Route path="/dongchangquestion" element={<QuestionDongchang />} />
       </Routes>
     </BrowserRouter>
   )
