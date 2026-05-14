@@ -262,6 +262,47 @@
   background: transparent;
 }
 
+@media (min-width: 1600px) and (min-height: 900px) {
+  .dongchang-question-header {
+    padding-top: 58px;
+  }
+
+  .dongchang-question-header h1 {
+    font-size: 62px;
+  }
+
+  .dongchang-question-header p {
+    font-size: 40px;
+  }
+
+  .dongchang-handcuffs {
+    top: 112px;
+    left: 290px;
+    width: 246px;
+  }
+
+  .dongchang-file {
+    width: min(68vw, 1220px);
+    margin-top: 24px;
+  }
+
+  .dongchang-polaroid {
+    top: -42px;
+  }
+
+  .dongchang-polaroid p,
+  .dongchang-notice,
+  .dongchang-selected-question,
+  .dongchang-answer,
+  .dongchang-question-btn {
+    font-size: 24px;
+  }
+
+  .dongchang-question-list {
+    gap: 42px;
+  }
+}
+
 @media (max-width: 980px) {
   .dongchang-question-shell {
     min-height: 760px;
