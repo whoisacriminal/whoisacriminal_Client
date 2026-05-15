@@ -166,6 +166,72 @@
   text-align: left;
 }
 
+@media (min-width: 1600px) and (min-height: 900px) {
+  .suspect-board {
+    min-height: 1080px;
+    padding: 36px 54px 30px;
+  }
+
+  .board-header {
+    width: 430px;
+    margin: 18px 0 8px calc(25% - 215px);
+  }
+
+  .board-header h1 {
+    font-size: 48px;
+  }
+
+  .board-header h2 {
+    font-size: 50px;
+  }
+
+  .top-secret-stamp {
+    width: 400px;
+  }
+
+  .coffee-stain {
+    width: 430px;
+  }
+
+  .coffee-ring {
+    top: 29%;
+    right: -64px;
+    width: 360px;
+  }
+
+  .suspect-grid {
+    max-width: 1760px;
+    margin: 70px auto 0;
+    row-gap: 26px;
+    column-gap: 84px;
+  }
+
+  .suspect-card {
+    grid-template-columns: 250px minmax(390px, 1fr);
+    min-height: 318px;
+  }
+
+  .photo-frame {
+    width: 236px;
+    height: 318px;
+  }
+
+  .suspect-photo {
+    width: 216px;
+    height: 272px;
+  }
+
+  .suspect-table {
+    margin-top: 29px;
+  }
+
+  .suspect-table th,
+  .suspect-table td {
+    height: 56px;
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 1180px) {
   .suspect-board {
     height: auto;

@@ -262,6 +262,47 @@
   background: transparent;
 }
 
+@media (min-width: 1600px) and (min-height: 900px) {
+  .sarang-question-header {
+    padding-top: 58px;
+  }
+
+  .sarang-question-header h1 {
+    font-size: 62px;
+  }
+
+  .sarang-question-header p {
+    font-size: 40px;
+  }
+
+  .sarang-handcuffs {
+    top: 112px;
+    left: 290px;
+    width: 246px;
+  }
+
+  .sarang-file {
+    width: min(68vw, 1220px);
+    margin-top: 24px;
+  }
+
+  .sarang-polaroid {
+    top: -42px;
+  }
+
+  .sarang-polaroid p,
+  .sarang-notice,
+  .sarang-selected-question,
+  .sarang-answer,
+  .sarang-question-btn {
+    font-size: 24px;
+  }
+
+  .sarang-question-list {
+    gap: 42px;
+  }
+}
+
 @media (max-width: 980px) {
   .sarang-question-shell {
     min-height: 760px;
