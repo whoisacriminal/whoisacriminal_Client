@@ -1,0 +1,202 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.final-select-shell {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: clamp(120px, 15.5vh, 164px) clamp(48px, 8.2vw, 120px) 84px;
+  background: #fefaf7 url('../assets/background/bg-paper.png') center / cover no-repeat;
+  color: #fffaf1;
+  font-family: 'Joseon100Years', serif;
+  user-select: none;
+}
+
+.final-dark-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.final-coffee-stain,
+.final-coffee-circle {
+  position: absolute;
+  z-index: 1;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.final-coffee-stain {
+  top: -1px;
+  left: 2px;
+  width: min(38vw, 360px);
+  opacity: 0.58;
+}
+
+.final-coffee-circle {
+  top: 37.5%;
+  right: -100px;
+  width: min(31vw, 370px);
+  opacity: 0.62;
+}
+
+.final-select-header {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 clamp(112px, 13vh, 136px);
+  text-align: center;
+}
+
+.final-select-header h1 {
+  margin: 0;
+  color: #fffdf7;
+  font-size: clamp(36px, 3.8vw, 50px);
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.final-suspect-list {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: clamp(52px, 7.4vw, 98px);
+  align-items: start;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.final-suspect {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(34px, 5.8vh, 48px);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.final-suspect:hover,
+.final-suspect:focus-visible {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.28));
+}
+
+.final-suspect:focus-visible {
+  outline: none;
+}
+
+.final-photo-frame {
+  display: block;
+  width: min(100%, 197px);
+  aspect-ratio: 197 / 247;
+  padding: 11px;
+  background: #f4f4f4;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.38),
+    0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.final-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.final-suspect-name {
+  max-width: 100%;
+  color: #fffdf7;
+  font-size: clamp(34px, 3.15vw, 46px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.22);
+  white-space: nowrap;
+}
+
+@media (min-width: 1400px) {
+  .final-select-shell {
+    padding-top: 158px;
+  }
+
+  .final-suspect-list {
+    max-width: 1065px;
+  }
+}
+
+@media (max-width: 980px) {
+  .final-select-shell {
+    padding: 86px 32px 56px;
+  }
+
+  .final-select-header {
+    margin-bottom: 64px;
+  }
+
+  .final-suspect-list {
+    grid-template-columns: repeat(2, minmax(136px, 1fr));
+    gap: 54px 48px;
+    max-width: 620px;
+  }
+
+  .final-coffee-stain {
+    width: min(52vw, 340px);
+  }
+
+  .final-coffee-circle {
+    top: 55%;
+    right: -120px;
+    width: min(48vw, 330px);
+  }
+}
+
+@media (max-width: 520px) {
+  .final-select-shell {
+    padding: 58px 18px 42px;
+  }
+
+  .final-select-header h1 {
+    font-size: 30px;
+  }
+
+  .final-suspect-list {
+    gap: 38px 22px;
+  }
+
+  .final-suspect {
+    gap: 22px;
+  }
+
+  .final-photo-frame {
+    padding: 8px;
+  }
+
+  .final-suspect-name {
+    font-size: 27px;
+  }
+}

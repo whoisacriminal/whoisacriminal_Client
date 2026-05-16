@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.truth-reveal-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fefaf7 url('../assets/background/bg-paper.png') center / cover no-repeat;
+  color: #fffdf7;
+  font-family: 'Joseon100Years', serif;
+  user-select: none;
+}
+
+.truth-reveal-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.52);
+  pointer-events: none;
+}
+
+.truth-reveal-black-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.truth-reveal-coffee-stain,
+.truth-reveal-coffee-circle {
+  position: absolute;
+  z-index: 1;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.truth-reveal-coffee-stain {
+  top: -1px;
+  left: 2px;
+  width: min(38vw, 360px);
+  opacity: 0.38;
+}
+
+.truth-reveal-coffee-circle {
+  top: 37.5%;
+  right: -100px;
+  width: min(31vw, 370px);
+  opacity: 0.42;
+}
+
+.truth-reveal-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: min(90vw, 760px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  color: #fffdf7;
+  font-size: clamp(32px, 3.25vw, 48px);
+  font-weight: 400;
+  line-height: 1.36;
+  letter-spacing: 0;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.38);
+  word-break: keep-all;
+}
+
+@media (max-width: 980px) {
+  .truth-reveal-coffee-stain {
+    width: min(52vw, 340px);
+  }
+
+  .truth-reveal-coffee-circle {
+    top: 55%;
+    right: -120px;
+    width: min(48vw, 330px);
+  }
+}
+
+@media (max-width: 520px) {
+  .truth-reveal-title {
+    top: 50%;
+    font-size: 29px;
+  }
+}
