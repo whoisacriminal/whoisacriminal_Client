@@ -72,7 +72,9 @@ export default function InputName() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!name.trim()) return
+    const detectiveName = name.trim()
+    if (!detectiveName) return
+    window.localStorage.setItem('detectiveName', detectiveName)
     navigate('/start')
   }
 
