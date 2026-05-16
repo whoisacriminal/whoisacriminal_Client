@@ -12,6 +12,10 @@ import QuestionYideung from './pages/QuestionYideung'
 import QuestionTeamwon from './pages/QuestionTeamwon'
 import QuestionSarang from './pages/QuestionSarang'
 import QuestionDongchang from './pages/QuestionDongchang'
+import FinalSelect from './pages/FinalSelect'
+import TruthReveal from './pages/TruthReveal'
+import MissonCompleted from './pages/MissonCompleted'
+import MissonFailed from './pages/MissonFailed'
 
 function App() {
   return (
@@ -23,7 +27,6 @@ function App() {
         <Route path="/inputname" element={<InputName />} />
         <Route path="/evidence" element={<Evidence />} />
         <Route path="/suspectboard" element={<SuspectBoard />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/select" element={<Select />} />
         <Route path="/questionselect" element={<QuestionSelect />} />
         <Route path="/selectevidence" element={<SelectEvidence />} />
@@ -31,6 +34,11 @@ function App() {
         <Route path="/teamwonquestion" element={<QuestionTeamwon />} />
         <Route path="/sarangquestion" element={<QuestionSarang />} />
         <Route path="/dongchangquestion" element={<QuestionDongchang />} />
+        <Route path="/finalselect" element={<FinalSelect />} />
+        <Route path="/truthreveal" element={<TruthReveal />} />
+        <Route path="/missioncompleted" element={<MissonCompleted />} />
+        <Route path="/missionfailed" element={<MissonFailed />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,300 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.mission-completed-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fefaf7 url('../assets/background/bg-paper.png') center / cover no-repeat;
+  color: #070707;
+  font-family: 'Joseon100Years', serif;
+  user-select: none;
+}
+
+.mission-completed-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.36);
+  pointer-events: none;
+}
+
+.mission-completed-black-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-completed-coffee-stain,
+.mission-completed-coffee-circle {
+  position: absolute;
+  z-index: 1;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-completed-coffee-stain {
+  top: -1px;
+  left: 2px;
+  width: min(38vw, 360px);
+  opacity: 0.4;
+}
+
+.mission-completed-coffee-circle {
+  top: 37.5%;
+  right: -100px;
+  width: min(31vw, 370px);
+  opacity: 0.43;
+}
+
+.mission-case-file {
+  position: relative;
+  z-index: 3;
+  width: min(74.8vw, 1076px);
+  aspect-ratio: 1076 / 728;
+  transform: translateY(30px);
+}
+
+.mission-file-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-file-divider {
+  position: absolute;
+  top: 8.8%;
+  bottom: 10.5%;
+  left: 52.7%;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.mission-suspect-page,
+.mission-message-page {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.mission-suspect-page {
+  left: 10.2%;
+  top: 10.9%;
+  width: 34.6%;
+  height: 70%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10%;
+  background: url('../assets/background/graypaper.png') center / cover no-repeat;
+}
+
+.mission-message-page {
+  left: 55.4%;
+  top: 11%;
+  width: 37.4%;
+  height: 70%;
+  align-items: center;
+  background: #eeeeee url('../assets/background/paper.png') center / cover no-repeat;
+}
+
+.mission-mugshot {
+  position: relative;
+  width: 89%;
+  aspect-ratio: 326 / 394;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #ececec;
+}
+
+.mission-suspect-photo,
+.mission-prison-bars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-prison-bars {
+  object-position: center center;
+}
+
+.mission-suspect-name {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.mission-completed-stamp {
+  position: absolute;
+  top: calc(20% + 45px);
+  left: 50%;
+  z-index: 1;
+  width: min(66%, 310px);
+  height: auto;
+  transform: translateX(-50%) rotate(-4deg);
+  opacity: 0.78;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-message-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 102px;
+  text-align: center;
+  transform: translateY(44px);
+}
+
+.mission-message-copy p {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 550;
+  line-height: 1.42;
+  letter-spacing: 0;
+}
+
+.mission-detail-button {
+  min-width: 230px;
+  height: 47px;
+  padding: 0 28px;
+  border: 2px solid #050505;
+  border-radius: 999px;
+  background: transparent;
+  color: #050505;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 550;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 160ms ease;
+}
+
+.mission-detail-button:hover,
+.mission-detail-button:focus-visible {
+  background: #050505;
+  color: #f4f4f4;
+  transform: translateY(-2px);
+}
+
+.mission-detail-button:focus-visible {
+  outline: none;
+}
+
+.mission-tape {
+  position: absolute;
+  z-index: 3;
+  width: 188px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mission-tape-left {
+  top: calc(-5.6% - 50px);
+  left: 50%;
+  transform: translateX(-42%) rotate(-1deg);
+}
+
+.mission-tape-right {
+  top: calc(-4.7% - 50px);
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+}
+
+@media (max-width: 1100px) {
+  .mission-case-file {
+    width: min(88vw, 920px);
+  }
+
+  .mission-message-copy {
+    gap: 72px;
+  }
+}
+
+@media (max-width: 760px) {
+  .mission-completed-shell {
+    align-items: flex-start;
+    padding: 40px 18px;
+  }
+
+  .mission-case-file {
+    width: min(100%, 430px);
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    padding: 42px 28px 52px;
+    background: #77766e;
+    transform: none;
+  }
+
+  .mission-file-bg {
+    display: none;
+  }
+
+  .mission-file-divider {
+    display: none;
+  }
+
+  .mission-suspect-page,
+  .mission-message-page {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: 0;
+  }
+
+  .mission-message-page {
+    min-height: 360px;
+  }
+
+  .mission-message-copy {
+    gap: 54px;
+    transform: none;
+  }
+
+  .mission-tape-left,
+  .mission-tape-right {
+    top: -24px;
+  }
+}
