@@ -16,12 +16,15 @@ import FinalSelect from './pages/FinalSelect'
 import TruthReveal from './pages/TruthReveal'
 import MissonCompleted from './pages/MissonCompleted'
 import MissonFailed from './pages/MissonFailed'
+<<<<<<< HEAD
 import Ending1 from './pages/Ending1'
 import Ending2 from './pages/Ending2'
 import Ending3 from './pages/Ending3'
 import Ending4 from './pages/Ending4'
 import Ending5 from './pages/Ending5'
 import Ending6 from './pages/Ending6'
+=======
+>>>>>>> origin/main
 import Ranking from './pages/Ranking'
 
 function App() {
@@ -45,12 +48,15 @@ function App() {
         <Route path="/truthreveal" element={<TruthReveal />} />
         <Route path="/missioncompleted" element={<MissonCompleted />} />
         <Route path="/missionfailed" element={<MissonFailed />} />
+<<<<<<< HEAD
         <Route path="/ending1" element={<Ending1 />} />
         <Route path="/ending2" element={<Ending2 />} />
         <Route path="/ending3" element={<Ending3 />} />
         <Route path="/ending4" element={<Ending4 />} />
         <Route path="/ending5" element={<Ending5 />} />
         <Route path="/ending6" element={<Ending6 />} />
+=======
+>>>>>>> origin/main
         <Route path="/ranking" element={<Ranking />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
