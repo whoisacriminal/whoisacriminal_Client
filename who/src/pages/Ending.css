@@ -1,0 +1,100 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.ending-page {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  padding: clamp(48px, 8.4vh, 86px) clamp(24px, 5.3vw, 76px) 60px;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  row-gap: clamp(36px, 5.6vh, 74px);
+  font-family: 'Joseon100Years', 'Nanum Pen Script', 'Malgun Gothic', serif;
+  user-select: none;
+}
+
+.ending-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(32px, 3.2vw, 47px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+  word-break: keep-all;
+}
+
+.ending-photo {
+  display: block;
+  width: min(58.3vw, 840px);
+  max-width: 100%;
+  max-height: min(52vh, 536px);
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  align-self: center;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.ending-caption {
+  width: min(72vw, 1040px);
+  margin: 0 auto;
+  color: #fff;
+  font-size: clamp(30px, 2.55vw, 38px);
+  font-weight: 400;
+  line-height: 1.32;
+  letter-spacing: 0;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+  .ending-page {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    row-gap: clamp(28px, 5vh, 48px);
+  }
+
+  .ending-photo {
+    width: min(86vw, 720px);
+    max-height: 48vh;
+  }
+
+  .ending-caption {
+    width: 88vw;
+    font-size: clamp(24px, 5.8vw, 32px);
+  }
+}
+
+@media (max-width: 520px) {
+  .ending-page {
+    padding-inline: 20px;
+    padding-bottom: 44px;
+    row-gap: 30px;
+  }
+
+  .ending-title {
+    font-size: 30px;
+  }
+
+  .ending-photo {
+    width: 100%;
+    max-height: 42vh;
+  }
+
+  .ending-caption {
+    width: 100%;
+    font-size: 24px;
+  }
+}
