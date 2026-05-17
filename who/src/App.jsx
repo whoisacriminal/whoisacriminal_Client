@@ -16,6 +16,7 @@ import FinalSelect from './pages/FinalSelect'
 import TruthReveal from './pages/TruthReveal'
 import MissonCompleted from './pages/MissonCompleted'
 import MissonFailed from './pages/MissonFailed'
+import Ranking from './pages/Ranking'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/truthreveal" element={<TruthReveal />} />
         <Route path="/missioncompleted" element={<MissonCompleted />} />
         <Route path="/missionfailed" element={<MissonFailed />} />
+        <Route path="/ranking" element={<Ranking />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
