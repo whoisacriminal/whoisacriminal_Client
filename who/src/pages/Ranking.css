@@ -5,387 +5,586 @@
   font-display: swap;
 }
 
+/* ════════════════════════════════
+   페이지 기반
+════════════════════════════════ */
+
 .ranking-page {
   position: relative;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 54px clamp(22px, 5vw, 82px) 38px;
+  padding: 52px clamp(18px, 5vw, 72px) 44px;
   overflow: hidden;
-  color: #f8f3dc;
-  background:
-    linear-gradient(rgba(8, 16, 12, 0.12), rgba(8, 16, 12, 0.18)),
-    url('../assets/background/bg-blackboard.png') center / cover no-repeat;
+  color: #ede5c8;
+  background: url('../assets/background/bg-blackboard.png') center / cover no-repeat;
   font-family: 'Joseon100Years', serif;
 }
 
+/* 칠판 가장자리를 어둡게 — 콘텐츠 영역 자연스럽게 부각 */
 .ranking-page::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.12), transparent 18%),
-    radial-gradient(circle at 78% 76%, rgba(244, 236, 188, 0.09), transparent 20%);
-  mix-blend-mode: screen;
-  opacity: 0.58;
+  background: radial-gradient(
+    ellipse 76% 66% at 50% 46%,
+    transparent 32%,
+    rgba(1, 5, 3, 0.62) 100%
+  );
 }
+
+/* ════════════════════════════════
+   2컬럼 그리드
+════════════════════════════════ */
 
 .ranking-board {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(300px, 0.88fr) minmax(420px, 1.12fr);
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(14px, 2.6vw, 32px);
+  width: min(1120px, 100%);
   align-items: stretch;
-  gap: clamp(22px, 4vw, 56px);
-  width: min(1180px, 100%);
-  margin: 0 auto;
 }
 
-.ranking-current-panel,
-.ranking-list-panel {
+/* ════════════════════════════════
+   패널 공통 — 분필 질감 테두리
+════════════════════════════════ */
+
+.ranking-my-panel,
+.ranking-board-panel {
+  position: relative;
   box-sizing: border-box;
-  border: 2px solid rgba(244, 241, 218, 0.62);
-  background: rgba(3, 28, 20, 0.38);
+  background: rgba(2, 14, 9, 0.54);
+  /* 네 면 opacity 미세하게 다르게 → 손으로 그은 선 느낌 */
+  border-top:    1px solid rgba(238, 232, 204, 0.52);
+  border-right:  1px solid rgba(238, 232, 204, 0.34);
+  border-bottom: 1px solid rgba(238, 232, 204, 0.54);
+  border-left:   1px solid rgba(238, 232, 204, 0.46);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-    0 22px 48px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(1px);
+    0 0 0 1px rgba(238, 232, 204, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
-.ranking-current-panel {
+/* 분필 가루 하이라이트 — 상단 안쪽 */
+.ranking-my-panel::after,
+.ranking-board-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ════════════════════════════════
+   패널 진입 애니메이션
+   CSS 커스텀 프로퍼티로 offset 제어
+════════════════════════════════ */
+
+.ranking-my-panel {
+  --panel-offset: -3px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 470px;
-  padding: clamp(28px, 4vw, 48px);
-  text-align: center;
+  min-height: 460px;
+  padding: clamp(26px, 4vw, 44px) clamp(20px, 3.5vw, 38px);
+  opacity: 0;
+  animation: panelIn 620ms 100ms ease forwards;
 }
 
-.ranking-list-panel {
-  min-height: 470px;
-  padding: clamp(24px, 3vw, 36px);
+.ranking-board-panel {
+  --panel-offset: 2px;
+  min-height: 460px;
+  padding: clamp(22px, 3.5vw, 38px) clamp(20px, 3.5vw, 38px);
+  opacity: 0;
+  animation: panelIn 620ms 260ms ease forwards;
 }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(var(--panel-offset, 0)); }
+}
+
+/* ════════════════════════════════
+   Eyebrow 레이블
+════════════════════════════════ */
 
 .ranking-eyebrow {
-  margin: 0 0 12px;
-  color: #e7d88a;
-  font-size: clamp(1rem, 1.4vw, 1.28rem);
+  margin: 0 0 8px;
+  color: rgba(218, 210, 175, 0.5);
+  font-size: clamp(0.8rem, 1.1vw, 0.94rem);
+  letter-spacing: 0.22em;
   line-height: 1.3;
 }
 
-.ranking-current-panel h1,
-.ranking-list-header h2 {
-  margin: 0;
-  color: #fff9df;
+.ranking-eyebrow--en {
+  letter-spacing: 0.3em;
+  font-size: clamp(0.76rem, 0.98vw, 0.88rem);
+}
+
+/* ════════════════════════════════
+   왼쪽 패널 — 내 기록 카드
+════════════════════════════════ */
+
+.ranking-my-title {
+  position: relative;
+  margin: 0 0 clamp(18px, 3.5vh, 28px);
+  padding-bottom: 12px;
+  color: #ede5c8;
+  font-size: clamp(1.55rem, 2.6vw, 2.3rem);
   font-weight: 400;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
-.ranking-current-panel h1 {
-  font-size: 60px;
-  line-height: 1.18;
-}
-
-.ranking-time-display {
-  position: relative;
-  width: fit-content;
-  margin: 38px auto 18px;
-  padding: 0 10px 12px;
-  color: #ffffff;
-  font-size: clamp(3rem, 7vw, 6.4rem);
-  line-height: 1;
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.18),
-    2px 2px 0 rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
-}
-
-.ranking-time-display::after {
-  content: "";
+/* 제목 밑줄 — 분필로 슥 그어지는 연출 */
+.ranking-my-title::after {
+  content: '';
   position: absolute;
-  right: 4px;
   bottom: 0;
-  left: 4px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(245, 238, 196, 0.82);
-  box-shadow: 0 0 12px rgba(245, 238, 196, 0.35);
-  transform: rotate(-1.2deg);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(238, 232, 204, 0.3);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: drawChalkLine 540ms 760ms ease forwards;
 }
 
-.ranking-current-name {
-  margin: 0;
-  color: #d7edd9;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  line-height: 1.5;
-}
-
-.ranking-chalk-note {
-  width: min(360px, 100%);
-  margin: 34px auto 0;
-  padding: 15px 18px;
-  border: 1px dashed rgba(248, 243, 220, 0.5);
-  color: rgba(248, 243, 220, 0.86);
-  font-size: clamp(1rem, 1.35vw, 1.25rem);
-  line-height: 1.55;
-}
-
-.ranking-list-header {
+/* 시간 표시 — 히어로 숫자 */
+.ranking-my-time {
+  position: relative;
   display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(248, 243, 220, 0.48);
+  align-items: baseline;
+  gap: 0.18em;
+  margin-bottom: clamp(16px, 3vh, 24px);
   padding-bottom: 16px;
 }
 
-.ranking-list-header .ranking-eyebrow {
-  margin: 0;
-  color: #c9efd2;
-  white-space: nowrap;
+/* 시간 아래 분필 줄 — 살짝 짧고 기울어지게 */
+.ranking-my-time::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 82%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(238, 232, 204, 0.48),
+    rgba(238, 232, 204, 0.14) 75%,
+    transparent
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: drawChalkLine 580ms 1060ms ease forwards;
 }
 
-.ranking-list-header h2 {
-  font-size: clamp(1.9rem, 3vw, 3.2rem);
-  line-height: 1.16;
+.time-group {
+  display: flex;
+  align-items: baseline;
+}
+
+.time-num {
+  color: #ffffff;
+  font-size: clamp(2.9rem, 5.4vw, 4.5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.55),
+    0 0 28px rgba(255, 255, 255, 0.1);
+}
+
+.time-unit {
+  margin-left: 3px;
+  color: rgba(220, 212, 178, 0.72);
+  font-size: clamp(1.1rem, 1.7vw, 1.55rem);
+  line-height: 1;
+}
+
+/* 보상 라벨 — 분필로 박스 친 도장 */
+.ranking-rank-stamp {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: clamp(14px, 2.5vh, 20px);
+  padding: 4px 13px 3px;
+  border: 1px solid rgba(200, 188, 138, 0.42);
+  color: rgba(208, 197, 150, 0.68);
+  font-size: clamp(0.72rem, 0.92vw, 0.82rem);
+  letter-spacing: 0.16em;
+  opacity: 0;
+  animation: stampReveal 400ms 1160ms ease forwards;
+}
+
+@keyframes stampReveal {
+  from { opacity: 0; transform: rotate(-1.2deg) scale(0.9); }
+  to   { opacity: 1; transform: rotate(-1.2deg) scale(1); }
+}
+
+/* 카드 하단 메타 */
+.ranking-my-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.ranking-my-name {
+  margin: 0;
+  color: rgba(218, 210, 175, 0.7);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  line-height: 1.3;
+}
+
+/* 손으로 찍은 도장 느낌 */
+.ranking-my-record-no {
+  margin: 0;
+  color: rgba(218, 210, 175, 0.3);
+  font-size: clamp(0.68rem, 0.88vw, 0.8rem);
+  letter-spacing: 0.08em;
+  transform: rotate(-0.8deg);
+  transform-origin: right bottom;
+}
+
+/* 세계관 문장 */
+.ranking-flavor-text {
+  margin: 10px 0 0;
+  color: rgba(200, 192, 158, 0.35);
+  font-size: clamp(0.72rem, 0.9vw, 0.8rem);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* ════════════════════════════════
+   오른쪽 패널 — 클래스 기록판
+════════════════════════════════ */
+
+.ranking-board-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(238, 232, 204, 0.26);
+}
+
+.ranking-board-header-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* 아주 작은 보조 레이블 */
+.ranking-today-label {
+  margin: 0;
+  color: rgba(200, 192, 158, 0.28);
+  font-size: clamp(0.62rem, 0.78vw, 0.72rem);
+  letter-spacing: 0.24em;
+}
+
+.ranking-board-title {
+  margin: 0;
+  color: #ede5c8;
+  font-size: clamp(1.65rem, 2.7vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0;
   text-align: right;
 }
 
+/* ════════════════════════════════
+   랭킹 리스트
+════════════════════════════════ */
+
 .ranking-list {
-  display: grid;
-  gap: 13px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.ranking-card {
-  position: relative;
-  box-sizing: border-box;
+.ranking-row {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) auto;
+  grid-template-columns: 46px 1fr auto auto;
   align-items: center;
-  gap: 16px;
-  min-height: 66px;
-  padding: 14px 18px;
-  border: 1px solid rgba(248, 243, 220, 0.32);
-  background: rgba(4, 34, 24, 0.34);
-  color: #f8f3dc;
+  gap: 14px;
+  padding: 12px 2px;
+  border-bottom: 1px solid rgba(238, 232, 204, 0.12);
   opacity: 0;
-  transform: translateY(12px);
-  animation: rankingCardIn 520ms ease forwards;
+  transform: translateY(8px);
+  animation: rowIn 420ms var(--row-delay, 460ms) ease forwards;
+  transition: background 180ms ease;
 }
 
-.ranking-card-top {
-  border-width: 2px;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015)),
-    rgba(5, 42, 29, 0.48);
+/* 홀짝 행 구분선 opacity 미세하게 다르게 */
+.ranking-row:nth-child(odd)  { border-bottom-color: rgba(238, 232, 204, 0.16); }
+.ranking-row:nth-child(even) { border-bottom-color: rgba(238, 232, 204, 0.1);  }
+
+.ranking-row:last-child {
+  border-bottom: none;
 }
 
-.ranking-card-top::after {
-  content: "";
-  position: absolute;
-  right: 18px;
-  bottom: 8px;
-  left: 18px;
-  height: 3px;
-  border-radius: 999px;
-  opacity: 0.7;
-  transform: rotate(-0.45deg);
+/* hover: 분필이 살짝 번지는 느낌 */
+.ranking-row:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.ranking-card-top-1 {
-  border-color: rgba(255, 248, 180, 0.82);
+/* 1등 행 — 미세하게 더 밝게 */
+.ranking-row--first .ranking-row-name,
+.ranking-row--first .ranking-row-time {
+  color: rgba(255, 252, 224, 0.96);
 }
 
-.ranking-card-top-1::after {
-  background: #fff1a6;
+/* 내 기록 행 — 입장 + 하이라이트 펄스 */
+.ranking-row--me {
+  background: rgba(78, 142, 100, 0.09);
+  animation-name: rowIn, chalkPulse;
+  animation-duration: 420ms, 820ms;
+  animation-delay: var(--row-delay, 624ms), calc(var(--row-delay, 624ms) + 460ms);
+  animation-fill-mode: forwards, both;
+  animation-timing-function: ease, ease;
 }
 
-.ranking-card-top-2 {
-  border-color: rgba(211, 241, 225, 0.78);
-}
-
-.ranking-card-top-2::after {
-  background: #d3f1e1;
-}
-
-.ranking-card-top-3 {
-  border-color: rgba(245, 203, 176, 0.78);
-}
-
-.ranking-card-top-3::after {
-  background: #f5cbb0;
-}
-
-.ranking-card-current {
-  border-color: rgba(129, 221, 157, 0.9);
-  background:
-    linear-gradient(90deg, rgba(129, 221, 157, 0.2), rgba(255, 255, 255, 0.03)),
-    rgba(4, 41, 27, 0.62);
-  box-shadow:
-    inset 0 0 0 1px rgba(219, 255, 226, 0.26),
-    0 0 22px rgba(129, 221, 157, 0.16);
-}
-
-.ranking-rank-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.ranking-rank {
-  color: #fff7c6;
-  font-size: clamp(1.45rem, 2.1vw, 2rem);
+/* 순위 숫자 */
+.ranking-row-num {
+  color: rgba(218, 210, 175, 0.35);
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
   line-height: 1;
-  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-.ranking-chalk-star {
-  color: #fff1a6;
-  font-size: 1.8rem;
-  line-height: 1;
-  transform: rotate(-12deg);
-}
+.ranking-row--first .ranking-row-num { color: rgba(218, 210, 175, 0.72); }
+.ranking-row--me    .ranking-row-num { color: rgba(218, 210, 175, 0.58); }
 
-.ranking-user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.ranking-user-name {
+/* 이름 */
+.ranking-row-name {
   overflow: hidden;
-  color: #ffffff;
-  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  color: rgba(237, 229, 200, 0.8);
+  font-size: clamp(1.05rem, 1.65vw, 1.48rem);
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.ranking-you-label {
-  flex: 0 0 auto;
-  padding: 5px 10px 4px;
-  border: 1px solid rgba(211, 255, 219, 0.78);
-  color: #dcffe2;
-  font-size: 0.95rem;
-  line-height: 1;
+.ranking-row--me .ranking-row-name {
+  color: #ffffff;
 }
 
-.ranking-user-time {
-  color: #f8f3dc;
-  font-size: clamp(1.15rem, 1.65vw, 1.55rem);
-  line-height: 1.2;
+/* 내 기록 태그 — 분필로 손으로 박스 친 라벨 */
+.ranking-row-me-tag {
+  flex-shrink: 0;
+  padding: 3px 7px 2px;
+  border: 1px solid rgba(195, 230, 205, 0.36);
+  color: rgba(195, 230, 205, 0.62);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
   white-space: nowrap;
 }
 
-.ranking-home-button {
+/* 시간 */
+.ranking-row-time {
+  color: rgba(218, 210, 175, 0.58);
+  font-size: clamp(0.88rem, 1.3vw, 1.15rem);
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.ranking-row--me .ranking-row-time {
+  color: rgba(218, 210, 175, 0.88);
+}
+
+/* ════════════════════════════════
+   버튼 — 분필 네모 선택지
+════════════════════════════════ */
+
+.ranking-actions {
   position: relative;
   z-index: 1;
-  align-self: center;
-  min-width: 168px;
-  margin-top: clamp(24px, 4vh, 40px);
-  padding: 13px 28px 12px;
-  border: 2px solid rgba(248, 243, 220, 0.76);
-  background: rgba(5, 32, 23, 0.62);
-  color: #fff9df;
+  display: flex;
+  gap: clamp(12px, 2vw, 20px);
+  margin-top: clamp(18px, 3vh, 30px);
+  opacity: 0;
+  animation: fadeUp 500ms 1560ms ease forwards;
+}
+
+.ranking-btn {
+  padding: 11px 26px 10px;
+  border: 1px solid rgba(218, 210, 175, 0.38);
+  background: transparent;
+  color: rgba(218, 210, 175, 0.6);
   font-family: 'Joseon100Years', serif;
-  font-size: 1.35rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
   line-height: 1;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    background  160ms ease,
+    color       160ms ease,
+    border-color 160ms ease,
+    transform   120ms ease;
 }
 
-.ranking-home-button:hover {
-  background: rgba(248, 243, 220, 0.16);
-  box-shadow: 0 0 18px rgba(248, 243, 220, 0.24);
-  transform: translateY(-2px);
+.ranking-btn:hover {
+  background: rgba(218, 210, 175, 0.08);
+  color: rgba(218, 210, 175, 0.9);
+  border-color: rgba(218, 210, 175, 0.62);
 }
 
-.ranking-home-button:active {
-  transform: translateY(0);
+.ranking-btn:active {
+  transform: translateY(1px);
+  background: rgba(218, 210, 175, 0.04);
+  transition-duration: 80ms;
 }
 
-@keyframes rankingCardIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* 주 버튼 (처음 화면으로) — 약간 밝게 */
+.ranking-btn--primary {
+  color: rgba(218, 210, 175, 0.78);
+  border-color: rgba(218, 210, 175, 0.5);
+}
+
+.ranking-btn--primary:hover {
+  color: rgba(255, 252, 224, 0.96);
+  border-color: rgba(218, 210, 175, 0.75);
+  background: rgba(218, 210, 175, 0.1);
+}
+
+/* ════════════════════════════════
+   키프레임
+════════════════════════════════ */
+
+/* 분필선 좌→우로 그어지는 효과 */
+@keyframes drawChalkLine {
+  to { transform: scaleX(1); }
+}
+
+/* 랭킹 행 등장 */
+@keyframes rowIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 내 기록 행 하이라이트 펄스 */
+@keyframes chalkPulse {
+  0%   { background: rgba(78, 142, 100, 0.09); }
+  38%  {
+    background: rgba(78, 142, 100, 0.22);
+    box-shadow: inset 0 0 22px rgba(78, 148, 105, 0.12);
   }
+  100% { background: rgba(78, 142, 100, 0.09); }
 }
 
-@media (max-width: 900px) {
+/* 버튼 영역 등장 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════
+   반응형
+════════════════════════════════ */
+
+@media (max-width: 880px) {
   .ranking-page {
-    min-height: 100vh;
+    justify-content: flex-start;
+    padding-top: 38px;
     overflow-y: auto;
-    padding-top: 34px;
   }
 
   .ranking-board {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 14px;
   }
 
-  .ranking-current-panel,
-  .ranking-list-panel {
+  /* 모바일: offset 제거 */
+  .ranking-my-panel,
+  .ranking-board-panel {
+    --panel-offset: 0;
     min-height: auto;
   }
 
-  .ranking-current-panel {
-    padding-block: 34px;
+  .ranking-my-panel {
+    padding-bottom: 30px;
   }
 
-  .ranking-time-display {
-    margin-top: 24px;
+  .ranking-my-footer {
+    margin-top: 20px;
+  }
+
+  .ranking-actions {
+    width: 100%;
+    max-width: 480px;
+    justify-content: center;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 500px) {
   .ranking-page {
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-inline: 14px;
   }
 
-  .ranking-list-header {
-    display: block;
+  /* 모바일: 순위 + 이름 / 시간 2줄 레이아웃 */
+  .ranking-row {
+    grid-template-columns: 38px 1fr;
+    grid-template-rows: auto auto;
+    gap: 3px 10px;
+    padding-block: 11px;
   }
 
-  .ranking-list-header h2 {
-    margin-top: 8px;
-    text-align: left;
+  .ranking-row-num {
+    grid-row: 1 / 3;
+    align-self: center;
+    font-size: 1.3rem;
   }
 
-  .ranking-card {
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 10px 12px;
-    padding: 13px 14px 15px;
+  .ranking-row-name {
+    align-self: end;
   }
 
-  .ranking-user-time {
+  .ranking-row-me-tag {
+    display: none;
+  }
+
+  .ranking-row-time {
     grid-column: 2;
     justify-self: start;
+    align-self: start;
+    color: rgba(218, 210, 175, 0.44);
+    font-size: 0.8rem;
   }
 
-  .ranking-user-info {
-    flex-wrap: wrap;
+  .ranking-row--me .ranking-row-time {
+    color: rgba(218, 210, 175, 0.7);
   }
 
-  .ranking-you-label {
-    font-size: 0.82rem;
+  .ranking-actions {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .ranking-home-button {
+  .ranking-btn {
     width: min(100%, 260px);
+    text-align: center;
   }
 }
