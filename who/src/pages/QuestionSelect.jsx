@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './QuestionSelect.css'
 import coffeeCircle from '../assets/background/coffee-circle.png'
 import coffeeStain from '../assets/background/coffee-stain.png'
@@ -14,8 +14,23 @@ const SUSPECTS = [
   { id: 'lee', name: '이사랑', image: sarang },
 ]
 
+const QUESTION_ROUTES = {
+  jo: '/dongchangquestion',
+  woo: '/teamwonquestion',
+  yun: '/yideungquestion',
+  lee: '/sarangquestion',
+}
+
 export default function QuestionSelect() {
-  const [selectedId, setSelectedId] = useState(null)
+  const navigate = useNavigate()
+
+  const handleSelect = (suspectId) => {
+    const route = QUESTION_ROUTES[suspectId]
+
+    if (route) {
+      navigate(route)
+    }
+  }
 
   return (
     <main className="question-select-shell">
@@ -41,15 +56,12 @@ export default function QuestionSelect() {
 
       <section className="question-suspect-list" aria-label="심문할 사람 선택">
         {SUSPECTS.map((suspect) => {
-          const isSelected = selectedId === suspect.id
-
           return (
             <button
               key={suspect.id}
               type="button"
-              className={`question-suspect ${isSelected ? 'is-selected' : ''}`}
-              onClick={() => setSelectedId(suspect.id)}
-              aria-pressed={isSelected}
+              className="question-suspect"
+              onClick={() => handleSelect(suspect.id)}
             >
               <span className="question-photo-frame">
                 <img

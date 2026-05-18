@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './SelectEvidence.css'
 import bg from '../assets/selected_evidence/bg.png'
 import kimImg1 from '../assets/selected_evidence/woo/yun/jo/kim/kim1.png'
@@ -17,6 +17,20 @@ const EVIDENCE_MAP = {
 export default function SelectEvidence() {
   const { state: character } = useLocation()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        navigate('/questionselect')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navigate])
 
   const evidences = character ? (EVIDENCE_MAP[character.id] ?? []) : []
 

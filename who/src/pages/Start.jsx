@@ -59,7 +59,7 @@ function DecorativeAsset({ className, floatClass, src, alt, style }) {
   )
 }
 
-function Start({ onInvestigate, onSkip }) {
+function Start({ onInvestigate }) {
   const shellRef = useRef(null)
   const typeTimersRef = useRef([])
   const [stageScale, setStageScale] = useState(() => getInitialScale())
@@ -225,13 +225,6 @@ function Start({ onInvestigate, onSkip }) {
     navigation.navigate('/evidence')
   }
 
-  const handleSkip = () => {
-    // TODO: navigate to /incidentscene
-    if (typeof onSkip === 'function') {
-      onSkip()
-    }
-  }
-
   const shellClassName = [
     'start-shell',
     isMounted ? 'is-mounted' : '',
@@ -324,9 +317,6 @@ function Start({ onInvestigate, onSkip }) {
           <div className="start-actions" aria-label="Start actions">
             <NoirButton type="button" onClick={handleInvestigate}>
               조사하기
-            </NoirButton>
-            <NoirButton type="button" variant="secondary" onClick={handleSkip}>
-              건너뛰기
             </NoirButton>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SuspectBoard.css";
 import dongchang from "../assets/suspect/dongchang.png";
 import sarang from "../assets/suspect/sarang.png";
@@ -77,6 +79,22 @@ function SuspectCard({ suspect }) {
 }
 
 export default function SuspectBoard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        navigate("/select");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navigate]);
+
   return (
     <section className="suspect-board">
       <div className="center-divider" />

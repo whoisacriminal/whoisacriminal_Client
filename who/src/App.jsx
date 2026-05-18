@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import Intro from './pages/Intro'
 import Start from './pages/Start'
-import Incidentscene from './pages/Incidentscene'
 import InputName from './pages/InputName'
 import Evidence from './pages/Evidence'
 import SuspectBoard from './pages/SuspectBoard'
@@ -30,7 +29,6 @@ function App() {
       <Routes>
         <Route path="/" element={<IntroRoute />} />
         <Route path="/start" element={<StartRoute />} />
-        <Route path="/incidentscene" element={<Incidentscene />} />
         <Route path="/inputname" element={<InputName />} />
         <Route path="/evidence" element={<Evidence />} />
         <Route path="/suspectboard" element={<SuspectBoard />} />
@@ -70,7 +68,6 @@ function StartRoute() {
   return (
     <Start
       onInvestigate={() => navigate('/incidentscene')}
-      onSkip={() => navigate('/incidentscene')}
     />
   )
 }

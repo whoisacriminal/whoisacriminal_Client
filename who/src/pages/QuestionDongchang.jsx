@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './QuestionDongchang.css'
 import bgBlackboard from '../assets/background/bg-blackboard.png'
 import handcuffs from '../assets/start/handcuffs.png'
@@ -26,8 +27,23 @@ const QUESTIONS = [
 ]
 
 export default function QuestionDongchang() {
+  const navigate = useNavigate()
   const [selectedQuestion, setSelectedQuestion] = useState(null)
   const selected = QUESTIONS.find((question) => question.id === selectedQuestion)
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        navigate('/finalselect')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navigate])
 
   return (
     <main className="dongchang-question-shell">

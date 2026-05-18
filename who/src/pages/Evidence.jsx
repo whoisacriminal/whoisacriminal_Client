@@ -61,7 +61,7 @@ export default function Evidence() {
           </figcaption>
         </figure>
       </section>
-      <NoirButton type="button" className="evidence-start-button" onClick={() => navigate('/investigation')}>
+      <NoirButton type="button" className="evidence-start-button" onClick={() => navigate('/suspectboard')}>
         용의자 보러 가기
       </NoirButton>
     </main>

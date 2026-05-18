@@ -338,6 +338,7 @@
   bottom: 52px;
   transform: translateX(-50%);
   display: flex;
+  justify-content: center;
   gap: 16px;
   z-index: 4;
 }

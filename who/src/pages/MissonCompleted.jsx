@@ -99,7 +99,7 @@ export default function MissonCompleted() {
             <button
               className="mission-detail-button"
               type="button"
-              onClick={() => navigate('/truthreveal')}
+              onClick={() => navigate('/ending1')}
             >
               사건의 전말 확인하기
             </button>
