@@ -1,0 +1,160 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.teacher-dialogue-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #050403;
+  color: #fff;
+  font-family: 'Joseon100Years', 'Malgun Gothic', sans-serif;
+}
+
+.teacher-dialogue-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.teacher-dialogue-dim {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.34) 46%, rgba(0, 0, 0, 0.66) 100%),
+    radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.28) 68%, rgba(0, 0, 0, 0.44) 100%);
+}
+
+.teacher-dialogue-panel {
+  position: absolute;
+  inset: auto 0 0;
+  height: 28.3%;
+  min-height: 190px;
+  z-index: 1;
+}
+
+.teacher-dialogue-panel::before {
+  content: '';
+  position: absolute;
+  inset: -24% 0 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.42) 56%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+.teacher-dialogue-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 26.6%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.teacher-dialogue-name {
+  position: absolute;
+  left: 7.95%;
+  top: 0;
+  min-width: clamp(210px, 16.45vw, 316px);
+  height: clamp(76px, 5.95vw, 114px);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-size: clamp(34px, 2.92vw, 56px);
+  line-height: 1;
+  letter-spacing: 0;
+  text-shadow:
+    0 0 1px #fff,
+    0 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.teacher-dialogue-text {
+  position: absolute;
+  left: 12.35%;
+  right: 7%;
+  top: 58%;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(25px, 2.04vw, 39px);
+  line-height: 1.28;
+  letter-spacing: 0;
+  word-break: keep-all;
+  text-shadow:
+    0 0 1px #fff,
+    0 2px 3px rgba(255, 255, 255, 0.16),
+    0 5px 18px rgba(0, 0, 0, 0.75);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.02em;
+  margin-left: 2px;
+  vertical-align: -0.1em;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.22);
+  animation: cursor-blink 1.02s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .teacher-dialogue-page {
+    min-height: 620px;
+  }
+
+  .teacher-dialogue-bg {
+    object-position: center center;
+  }
+
+  .teacher-dialogue-panel {
+    height: 32%;
+  }
+
+  .teacher-dialogue-line {
+    top: 24%;
+    height: 2px;
+  }
+
+  .teacher-dialogue-name {
+    left: 7%;
+    min-width: 178px;
+    height: 72px;
+    font-size: 32px;
+  }
+
+  .teacher-dialogue-text {
+    left: 7%;
+    right: 7%;
+    top: 52%;
+    font-size: 24px;
+  }
+}
