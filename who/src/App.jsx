@@ -24,6 +24,7 @@ import Ending6 from './pages/Ending6'
 import Ranking from './pages/Ranking'
 import TeacherDialogue1 from './pages/TeacherDialogue1'
 import TeacherDialogue2 from './pages/TeacherDialogue2'
+import CaseIntro from './pages/CaseIntro'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/inputname" element={<InputName />} />
         <Route path="/teacherdialogue1" element={<TeacherDialogue1 />} />
         <Route path="/teacherdialogue2" element={<TeacherDialogue2 />} />
+        <Route path="/caseintro" element={<CaseIntro />} />
         <Route path="/evidence" element={<Evidence />} />
         <Route path="/suspectboard" element={<SuspectBoard />} />
         <Route path="/select" element={<Select />} />

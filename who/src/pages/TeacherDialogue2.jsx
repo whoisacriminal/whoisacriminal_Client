@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './TeacherDialogue2.css'
 import classroomBg from '../assets/background/bg-yirea.png'
 
@@ -21,6 +22,7 @@ function getTypingDelay(character) {
 }
 
 export default function TeacherDialogue() {
+  const navigate = useNavigate()
   const [typedText, setTypedText] = useState('')
   const timersRef = useRef([])
 
@@ -53,6 +55,20 @@ export default function TeacherDialogue() {
       timersRef.current.forEach((id) => window.clearTimeout(id))
     }
   }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        navigate('/caseintro')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navigate])
 
   return (
     <main className="teacher-dialogue-page" aria-label="교실 대화 장면">

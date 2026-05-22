@@ -70,12 +70,25 @@ export default function InputName() {
     return () => timersRef.current.forEach((id) => window.clearTimeout(id))
   }, [])
 
+  const saveName = () => {
+    const detectiveName = name.trim()
+    if (!detectiveName) return false
+    window.localStorage.setItem('detectiveName', detectiveName)
+    return true
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    const detectiveName = name.trim()
-    if (!detectiveName) return
-    window.localStorage.setItem('detectiveName', detectiveName)
-    navigate('/start')
+    if (!saveName()) return
+    navigate('/teacherdialogue1')
+  }
+
+  const handleNameKeyDown = (e) => {
+    if (e.key !== 'Enter') return
+
+    e.preventDefault()
+    if (!saveName()) return
+    navigate('/teacherdialogue1')
   }
 
   return (
@@ -107,6 +120,7 @@ export default function InputName() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleNameKeyDown}
               autoFocus
             />
           </div>

@@ -1,0 +1,135 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.case-intro-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  background: #111412;
+  color: #fff;
+  font-family: 'Joseon100Years', serif;
+}
+
+.case-intro-paper {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.18) contrast(1.2) saturate(0.55);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.case-intro-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.018) 0%, rgba(255, 255, 255, 0) 34%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.12) 28%, rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0.36) 100%),
+    rgba(0, 0, 0, 0.55);
+}
+
+.case-intro-stain {
+  position: absolute;
+  z-index: -2;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: brightness(0.44) saturate(0.55) contrast(1.05);
+  opacity: 0.26;
+}
+
+.case-intro-stain-left {
+  left: -34px;
+  top: -45px;
+  width: clamp(132px, 13vw, 190px);
+}
+
+.case-intro-stain-right {
+  right: -108px;
+  top: 37%;
+  width: clamp(230px, 25vw, 360px);
+  transform: translateY(-4%);
+  opacity: 0.2;
+}
+
+.case-intro-copy {
+  width: min(960px, calc(100vw - 44px));
+  margin-top: 4px;
+  text-align: center;
+  font-size: clamp(25px, 2.85vw, 42px);
+  line-height: 1.34;
+  letter-spacing: 0;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.46),
+    0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.case-intro-copy p {
+  margin: 0;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+.case-intro-copy p + p {
+  margin-top: clamp(88px, 11.2vh, 128px);
+}
+
+.case-intro-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.92em;
+  margin-left: 5px;
+  vertical-align: -0.08em;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.32);
+  animation: case-intro-cursor-blink 0.95s steps(1) infinite;
+}
+
+@keyframes case-intro-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .case-intro-copy {
+    width: min(560px, calc(100vw - 28px));
+    font-size: clamp(21px, 7.2vw, 31px);
+    line-height: 1.42;
+  }
+
+  .case-intro-copy p + p {
+    margin-top: 72px;
+  }
+
+  .case-intro-stain-left {
+    left: -70px;
+    top: -36px;
+  }
+
+  .case-intro-stain-right {
+    right: -170px;
+    width: 310px;
+  }
+}
