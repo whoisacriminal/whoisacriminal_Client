@@ -13,6 +13,10 @@ const DESKS = [
 export default function Select() {
   const navigate = useNavigate()
 
+  const openEvidence = (desk) => {
+    navigate(`/selectevidence?character=${desk.id}`, { state: desk })
+  }
+
   return (
     <main className="select-shell">
       <img src={bgClass} alt="" className="select-bg" draggable="false" />
@@ -30,7 +34,7 @@ export default function Select() {
           <button
             type="button"
             className="select-desk-btn"
-            onClick={() => navigate('/selectevidence', { state: desk })}
+            onClick={() => openEvidence(desk)}
             aria-label={`${desk.name}의 책상 조사하기`}
           >
             <span className="select-desk-plus">+</span>
