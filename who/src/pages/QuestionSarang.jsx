@@ -1,5 +1,7 @@
 ﻿import { useState } from 'react'
 import './QuestionSarang.css'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import bgBlackboard from '../assets/background/bg-blackboard.png'
 import handcuffs from '../assets/start/handcuffs.png'
 import fileBoard from '../assets/question/file.png'
@@ -26,8 +28,23 @@ const QUESTIONS = [
 ]
 
 export default function QuestionSarang() {
+  const navigate = useNavigate()
   const [selectedQuestion, setSelectedQuestion] = useState(null)
   const selected = QUESTIONS.find((question) => question.id === selectedQuestion)
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        navigate('/finalselect')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navigate])
 
   return (
     <main className="sarang-question-shell">
@@ -58,8 +75,8 @@ export default function QuestionSarang() {
           <article className="sarang-question-paper">
             <img className="sarang-tape sarang-tape-right" src={tape2} alt="" draggable="false" />
 
-            <p className={`sarang-notice ${selected ? 'is-hidden' : ''}`}>
-              추가 질문은 한 번만 가능합니다.
+            <p className="sarang-notice">
+              궁금한 질문을 모두 확인하세요.
             </p>
 
             <div className={`sarang-question-list ${selected ? 'is-answered' : ''}`}>
@@ -71,7 +88,6 @@ export default function QuestionSarang() {
                     selected?.id === question.id ? 'is-selected' : ''}
                   }`}
                   onClick={() => setSelectedQuestion(question.id)}
-                  disabled={Boolean(selected)}
                 >
                   {question.text}
                 </button>

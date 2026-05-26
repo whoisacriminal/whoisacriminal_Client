@@ -74,8 +74,8 @@ export default function QuestionDongchang() {
           <article className="dongchang-question-paper">
             <img className="dongchang-tape dongchang-tape-right" src={tape2} alt="" draggable="false" />
 
-            <p className={`dongchang-notice ${selected ? 'is-hidden' : ''}`}>
-              추가 질문은 한 번만 가능합니다.
+            <p className="dongchang-notice">
+              궁금한 질문을 모두 확인하세요.
             </p>
 
             <div className={`dongchang-question-list ${selected ? 'is-answered' : ''}`}>
@@ -87,7 +87,6 @@ export default function QuestionDongchang() {
                     selected?.id === question.id ? 'is-selected' : ''}
                   }`}
                   onClick={() => setSelectedQuestion(question.id)}
-                  disabled={Boolean(selected)}
                 >
                   {question.text}
                 </button>
