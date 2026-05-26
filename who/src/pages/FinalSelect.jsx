@@ -6,6 +6,7 @@ import dongchang from '../assets/suspect/dongchang.png'
 import sarang from '../assets/suspect/sarang.png'
 import teamwon from '../assets/suspect/teamwon.png'
 import yideung from '../assets/suspect/yideung.png'
+import { useNavigate } from 'react-router-dom'
 
 const SUSPECTS = [
   { id: 'jo', name: '조동창', image: dongchang },
@@ -15,6 +16,16 @@ const SUSPECTS = [
 ]
 
 export default function FinalSelect() {
+  const navigate = useNavigate()
+
+  function handleSelect(id) {
+    if (id === 'jo') {
+      navigate('/missioncompleted')
+    } else {
+      navigate('/missionfailed')
+    }
+  }
+
   return (
     <main className="final-select-shell">
       <img
@@ -53,6 +64,7 @@ export default function FinalSelect() {
             key={suspect.id}
             type="button"
             className="final-suspect"
+            onClick={() => handleSelect(suspect.id)}
           >
             <span className="final-photo-frame">
               <img
