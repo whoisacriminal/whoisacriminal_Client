@@ -28,15 +28,13 @@
 /* ── 상단 타이틀 ── */
 .se-title {
   position: absolute;
-  top: 6%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 8%;
+  left: 7%;
   font-family: 'Joseon100Years', serif;
-  font-size: 28px;
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.15;
   color: #f5f0e8;
-  background: rgba(20, 20, 20, 0.65);
-  padding: 10px 40px;
-  border-radius: 10px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.75);
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
@@ -70,19 +68,14 @@
 .se-carousel-wrap {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 5;
   overflow: hidden;
 }
 
 /* ── 슬라이드 트랙 ── */
 .se-carousel-track {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  inset: 17% 0 25%;
   cursor: grab;
   touch-action: pan-y;
 }
@@ -92,21 +85,69 @@
 
 /* ── 개별 슬라이드 ── */
 .se-slide {
-  flex-shrink: 0;
-  width: min(80vw, 480px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(42vw, 570px);
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.72);
+  transition:
+    opacity 320ms ease,
+    transform 320ms ease,
+    filter 320ms ease;
+  filter: brightness(0.7);
+}
+.se-slide--active {
+  opacity: 1;
+  z-index: 3;
+  transform: translate(-50%, -50%) scale(1);
+  filter: brightness(1);
+}
+.se-slide--prev {
+  opacity: 0.32;
+  z-index: 1;
+  transform: translate(-130%, -50%) scale(0.78);
+}
+.se-slide--next {
+  opacity: 0.32;
+  z-index: 1;
+  transform: translate(30%, -50%) scale(0.78);
+}
+.se-slide--hidden {
+  pointer-events: none;
 }
 .se-slide img {
   width: 100%;
   height: auto;
-  max-height: 65vh;
+  max-height: 48vh;
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  border-radius: 5px;
+  box-shadow: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+.se-description {
+  position: absolute;
+  left: 50%;
+  bottom: 19%;
+  transform: translateX(-50%);
+  width: min(82vw, 620px);
+  margin: 0;
+  z-index: 16;
+  font-family: 'Joseon100Years', serif;
+  font-size: clamp(20px, 2.2vw, 32px);
+  line-height: 1.35;
+  color: #f5f0e8;
+  text-align: center;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.85);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  word-break: keep-all;
 }
 
 /* ── 좌우 화살표 버튼 (데스크톱) ── */
@@ -138,7 +179,7 @@
 /* ── 인디케이터 도트 ── */
 .se-dots {
   position: absolute;
-  bottom: 8%;
+  bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
