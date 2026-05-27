@@ -40,7 +40,7 @@
   z-index: 10;
 }
 
-/* ── 뒤로가기 버튼 ── */
+/* ── 뒤로가기 버튼 ──
 .se-back-btn {
   position: absolute;
   top: 5%;
@@ -62,7 +62,7 @@
 .se-back-btn:hover {
   background: rgba(0, 0, 0, 0.75);
   transform: scale(1.08);
-}
+} */
 
 /* ── 캐러셀 래퍼 ── */
 .se-carousel-wrap {
