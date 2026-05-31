@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Ranking.css'
-
-const currentUserRecord = {
-  name: '나',
-  playTime: 438,
-}
-
-const rankingData = [
-  { id: 1, rank: 1, name: '김서연', playTime: 386, isCurrentUser: false },
-  { id: 2, rank: 2, name: '박도윤', playTime: 411, isCurrentUser: false },
-  { id: 3, rank: 3, name: '나', playTime: 438, isCurrentUser: true },
-  { id: 4, rank: 4, name: '이하준', playTime: 462, isCurrentUser: false },
-  { id: 5, rank: 5, name: '최지우', playTime: 489, isCurrentUser: false },
-  { id: 6, rank: 6, name: '이민준', playTime: 537, isCurrentUser: false },
-]
+import {
+  fetchAllRankings,
+  createRanking,
+  getGamePlayTime,
+  clearGameStartTime,
+} from '../utils/api'
 
 function formatPlayTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60)
@@ -25,12 +17,62 @@ function formatPlayTime(totalSeconds) {
 export default function Ranking() {
   const navigate = useNavigate()
   const [animatedTime, setAnimatedTime] = useState(0)
+  const [allRankings, setAllRankings] = useState([])
+  const [currentUserRecord, setCurrentUserRecord] = useState(null)
+  const [myRank, setMyRank] = useState('-')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const myRank = rankingData.find(r => r.isCurrentUser)?.rank ?? '-'
   const animatedMinutes = Math.floor(animatedTime / 60)
   const animatedSeconds = String(animatedTime % 60).padStart(2, '0')
 
   useEffect(() => {
+    const initializeRanking = async () => {
+      try {
+        setLoading(true)
+
+        // 게임 플레이 시간 계산
+        const playTime = getGamePlayTime()
+
+        // 사용자 이름 가져오기
+        const detectiveName = window.localStorage.getItem('detectiveName') || '탐정'
+
+        // 1. 현재 사용자 기록을 데이터베이스에 저장
+        const newRecord = await createRanking(detectiveName, playTime)
+        setCurrentUserRecord(newRecord)
+
+        // 2. 모든 랭킹 데이터 조회
+        const rankings = await fetchAllRankings()
+        setAllRankings(rankings)
+
+        // 3. 현재 사용자의 순위 찾기
+        const userRankData = rankings.find((r) => r.id === newRecord.id)
+        if (userRankData) {
+          setMyRank(userRankData.rank)
+        }
+
+        // 4. 게임 시작 시간 초기화
+        clearGameStartTime()
+      } catch (err) {
+        console.error('랭킹 로드 실패:', err)
+        setError('랭킹 데이터를 불러올 수 없습니다')
+        // 오류 시 로컬 스토리지 데이터 사용
+        setCurrentUserRecord({
+          name: window.localStorage.getItem('detectiveName') || '탐정',
+          playTime: getGamePlayTime(),
+        })
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    initializeRanking()
+  }, [])
+
+  // 플레이 시간 애니메이션
+  useEffect(() => {
+    if (!currentUserRecord) return
+
     let animationFrame = 0
     const delayTimer = setTimeout(() => {
       const duration = 1400
@@ -50,12 +92,25 @@ export default function Ranking() {
       clearTimeout(delayTimer)
       cancelAnimationFrame(animationFrame)
     }
-  }, [])
+  }, [currentUserRecord])
+
+  if (loading) {
+    return (
+      <div className="ranking-page">
+        <main className="ranking-board">
+          <p>데이터를 로드 중입니다...</p>
+        </main>
+      </div>
+    )
+  }
+
+  if (error) {
+    console.warn(error)
+  }
 
   return (
     <div className="ranking-page">
       <main className="ranking-board">
-
         {/* ── 왼쪽: 내 기록 카드 ── */}
         <section className="ranking-my-panel">
           <p className="ranking-eyebrow">오늘의 수사 기록</p>
@@ -77,13 +132,15 @@ export default function Ranking() {
           </div>
 
           <div className="ranking-rank-stamp">
-            CLASS RANK {String(myRank).padStart(2, '0')}
+            CLASS RANK {String(myRank).toString().padStart(2, '0')}
           </div>
 
           <div className="ranking-my-footer">
-            <p className="ranking-my-name">{currentUserRecord.name}의 기록</p>
+            <p className="ranking-my-name">
+              {currentUserRecord?.name || '탐정'}의 기록
+            </p>
             <p className="ranking-my-record-no">
-              Record No.{String(myRank).padStart(2, '0')}
+              Record No.{String(myRank).toString().padStart(2, '0')}
             </p>
           </div>
 
@@ -101,13 +158,13 @@ export default function Ranking() {
           </div>
 
           <ol className="ranking-list">
-            {rankingData.map((record, index) => (
+            {allRankings.slice(0, 10).map((record, index) => (
               <li
                 key={record.id}
                 className={[
                   'ranking-row',
                   record.rank === 1 ? 'ranking-row--first' : '',
-                  record.isCurrentUser ? 'ranking-row--me' : '',
+                  record.id === currentUserRecord?.id ? 'ranking-row--me' : '',
                 ].filter(Boolean).join(' ')}
                 style={{ '--row-delay': `${460 + index * 82}ms` }}
               >
@@ -115,7 +172,7 @@ export default function Ranking() {
                   {String(record.rank).padStart(2, '0')}
                 </span>
                 <span className="ranking-row-name">{record.name}</span>
-                {record.isCurrentUser && (
+                {record.id === currentUserRecord?.id && (
                   <span className="ranking-row-me-tag">내 기록</span>
                 )}
                 <span className="ranking-row-time">
@@ -125,7 +182,6 @@ export default function Ranking() {
             ))}
           </ol>
         </section>
-
       </main>
 
       <div className="ranking-actions">
