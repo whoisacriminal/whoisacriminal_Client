@@ -68,6 +68,12 @@ export function setGameStartTime() {
   return startTime
 }
 
+// 이전 기록 저장 플래그 제거
+export function clearRankSaved(name) {
+  if (!name) return
+  sessionStorage.removeItem(`rankSaved:${name}`)
+}
+
 // 게임 플레이 시간(초) 계산
 export function getGamePlayTime() {
   const startTime = parseInt(sessionStorage.getItem('gameStartTime') || '0', 10)

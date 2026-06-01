@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Ranking.css'
 import {
   fetchAllRankings,
+  fetchUserRanking,
   createRanking,
   getGamePlayTime,
   clearGameStartTime,
@@ -31,32 +32,55 @@ export default function Ranking() {
       try {
         setLoading(true)
 
-        // 게임 플레이 시간 계산
         const playTime = getGamePlayTime()
-
-        // 사용자 이름 가져오기
         const detectiveName = window.localStorage.getItem('detectiveName') || '탐정'
+        const rankSavedKey = `rankSaved:${detectiveName}`
+        const hasSavedRecord = sessionStorage.getItem(rankSavedKey) === 'true'
 
-        // 1. 현재 사용자 기록을 데이터베이스에 저장
-        const newRecord = await createRanking(detectiveName, playTime)
-        setCurrentUserRecord(newRecord)
+        let userRecord = null
 
-        // 2. 모든 랭킹 데이터 조회
+        // 1. 아직 저장된 기록이 없으면 한 번만 저장
+        if (!hasSavedRecord && playTime > 0) {
+          sessionStorage.setItem(rankSavedKey, 'true')
+          try {
+            const newRecord = await createRanking(detectiveName, playTime)
+            userRecord = newRecord
+          } catch (error) {
+            sessionStorage.removeItem(rankSavedKey)
+            throw error
+          }
+        }
+
+        // 2. 현재 사용자 최신 기록 조회 (이미 저장된 경우에도 확인)
+        if (!userRecord) {
+          userRecord = await fetchUserRanking(detectiveName)
+        }
+
+        // 3. 모든 랭킹 데이터 조회
         const rankings = await fetchAllRankings()
         setAllRankings(rankings)
 
-        // 3. 현재 사용자의 순위 찾기
-        const userRankData = rankings.find((r) => r.id === newRecord.id)
-        if (userRankData) {
-          setMyRank(userRankData.rank)
+        // 4. 새로 생성한 기록에는 아직 rank 정보가 없을 수 있으므로 보완
+        if (userRecord && typeof userRecord.rank === 'undefined') {
+          const userRankData = rankings.find((r) => r.id === userRecord.id)
+          if (userRankData) {
+            userRecord = {
+              ...userRecord,
+              rank: userRankData.rank,
+            }
+          }
         }
 
-        // 4. 게임 시작 시간 초기화
+        // 5. 현재 사용자 순위 설정
+        if (userRecord) {
+          setCurrentUserRecord(userRecord)
+          setMyRank(userRecord.rank)
+        }
+
         clearGameStartTime()
       } catch (err) {
         console.error('랭킹 로드 실패:', err)
         setError('랭킹 데이터를 불러올 수 없습니다')
-        // 오류 시 로컬 스토리지 데이터 사용
         setCurrentUserRecord({
           name: window.localStorage.getItem('detectiveName') || '탐정',
           playTime: getGamePlayTime(),
