@@ -49,8 +49,8 @@ const EVIDENCE_MAP = {
     { src: joImg2, description: '조동창의 일기장 중 한 페이지' },
   ],
   kim: [
-    { src: kimImg1, description: '김이레 노트북에서 발견된 비주얼스튜디오코드 커밋창' },
-    { src: kimImg2, description: '가방에서 나온 전교1등 성적표 ' },
+    { src: kimImg1, description: '가방에서 나온 전교1등 성적표' },
+    { src: kimImg2, description: '김이레 노트북에서 발견된 비주얼스튜디오코드 커밋창' },
   ],
   lee: [
     { src: leeImg1, description: '가방에서 나온 김이레, 송지훈의 사진 근데 왜 이사랑이 가지고 있지?' },
