@@ -74,6 +74,21 @@ export default function InputName() {
   const saveName = () => {
     const detectiveName = name.trim()
     if (!detectiveName) return false
+    const normalizedName = detectiveName.toLowerCase()
+    const usedNicknames = JSON.parse(window.localStorage.getItem('usedNicknames') || '[]')
+    const isDuplicate = usedNicknames.some(
+      (nickname) => nickname.trim().toLowerCase() === normalizedName,
+    )
+
+    if (isDuplicate) {
+      alert('중복된 닉네임입니다.')
+      return false
+    }
+
+    window.localStorage.setItem(
+      'usedNicknames',
+      JSON.stringify([...usedNicknames, detectiveName]),
+    )
     window.localStorage.setItem('detectiveName', detectiveName)
     // 이전 랭킹 저장 플래그 초기화
     clearRankSaved(detectiveName)
