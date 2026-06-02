@@ -19,7 +19,10 @@ export default function FinalSelect() {
   const navigate = useNavigate()
 
   function handleSelect(id) {
-    if (id === 'jo') {
+    const isCorrect = id === 'jo'
+    window.localStorage.setItem('criminalCaught', String(isCorrect))
+
+    if (isCorrect) {
       navigate('/missioncompleted')
     } else {
       navigate('/missionfailed')

@@ -5,15 +5,16 @@ import './Ranking.css'
 const currentUserRecord = {
   name: '나',
   playTime: 438,
+  criminalCaught: false,
 }
 
 const rankingData = [
-  { id: 1, rank: 1, name: '김서연', playTime: 386, isCurrentUser: false },
-  { id: 2, rank: 2, name: '박도윤', playTime: 411, isCurrentUser: false },
-  { id: 3, rank: 3, name: '나', playTime: 438, isCurrentUser: true },
-  { id: 4, rank: 4, name: '이하준', playTime: 462, isCurrentUser: false },
-  { id: 5, rank: 5, name: '최지우', playTime: 489, isCurrentUser: false },
-  { id: 6, rank: 6, name: '이민준', playTime: 537, isCurrentUser: false },
+  { id: 1, rank: 1, name: '김서연', playTime: 386, criminalCaught: true, isCurrentUser: false },
+  { id: 2, rank: 2, name: '박도윤', playTime: 411, criminalCaught: true, isCurrentUser: false },
+  { id: 3, rank: 3, name: '나', playTime: 438, criminalCaught: false, isCurrentUser: true },
+  { id: 4, rank: 4, name: '이하준', playTime: 462, criminalCaught: false, isCurrentUser: false },
+  { id: 5, rank: 5, name: '최지우', playTime: 489, criminalCaught: true, isCurrentUser: false },
+  { id: 6, rank: 6, name: '이민준', playTime: 537, criminalCaught: false, isCurrentUser: false },
 ]
 
 function formatPlayTime(totalSeconds) {
@@ -26,9 +27,22 @@ export default function Ranking() {
   const navigate = useNavigate()
   const [animatedTime, setAnimatedTime] = useState(0)
 
-  const myRank = rankingData.find(r => r.isCurrentUser)?.rank ?? '-'
+  const detectiveName = window.localStorage.getItem('detectiveName') || currentUserRecord.name
+  const criminalCaught = window.localStorage.getItem('criminalCaught') === 'true'
+  const myRecord = {
+    ...currentUserRecord,
+    name: detectiveName,
+    criminalCaught,
+  }
+  const records = rankingData.map(record => (
+    record.isCurrentUser
+      ? { ...record, name: detectiveName, criminalCaught }
+      : record
+  ))
+  const myRank = records.find(r => r.isCurrentUser)?.rank ?? '-'
   const animatedMinutes = Math.floor(animatedTime / 60)
   const animatedSeconds = String(animatedTime % 60).padStart(2, '0')
+  const arrestStatusLabel = criminalCaught ? '범인 검거 성공' : '범인 검거 실패'
 
   useEffect(() => {
     let animationFrame = 0
@@ -39,7 +53,7 @@ export default function Ranking() {
       function countUp(now) {
         const progress = Math.min((now - startTime) / duration, 1)
         const easedProgress = 1 - Math.pow(1 - progress, 3)
-        setAnimatedTime(Math.round(currentUserRecord.playTime * easedProgress))
+        setAnimatedTime(Math.round(myRecord.playTime * easedProgress))
         if (progress < 1) animationFrame = requestAnimationFrame(countUp)
       }
 
@@ -50,7 +64,7 @@ export default function Ranking() {
       clearTimeout(delayTimer)
       cancelAnimationFrame(animationFrame)
     }
-  }, [])
+  }, [myRecord.playTime])
 
   return (
     <div className="ranking-page">
@@ -80,14 +94,27 @@ export default function Ranking() {
             CLASS RANK {String(myRank).padStart(2, '0')}
           </div>
 
+          <div
+            className={[
+              'ranking-arrest-stamp',
+              criminalCaught ? 'ranking-arrest-stamp--success' : 'ranking-arrest-stamp--failed',
+            ].join(' ')}
+          >
+            {arrestStatusLabel}
+          </div>
+
           <div className="ranking-my-footer">
-            <p className="ranking-my-name">{currentUserRecord.name}의 기록</p>
+            <p className="ranking-my-name">{myRecord.name}의 기록</p>
             <p className="ranking-my-record-no">
               Record No.{String(myRank).padStart(2, '0')}
             </p>
           </div>
 
-          <p className="ranking-flavor-text">오늘의 기록이 칠판에 새겨졌습니다.</p>
+          <p className="ranking-flavor-text">
+            {criminalCaught
+              ? '검거 결과까지 오늘의 기록에 남았습니다.'
+              : '미해결 기록도 칠판에 함께 남았습니다.'}
+          </p>
         </section>
 
         {/* ── 오른쪽: 랭킹 기록판 ── */}
@@ -101,7 +128,7 @@ export default function Ranking() {
           </div>
 
           <ol className="ranking-list">
-            {rankingData.map((record, index) => (
+            {records.map((record, index) => (
               <li
                 key={record.id}
                 className={[
@@ -114,10 +141,20 @@ export default function Ranking() {
                 <span className="ranking-row-num">
                   {String(record.rank).padStart(2, '0')}
                 </span>
-                <span className="ranking-row-name">{record.name}</span>
-                {record.isCurrentUser && (
-                  <span className="ranking-row-me-tag">내 기록</span>
-                )}
+                <span className="ranking-row-main">
+                  <span className="ranking-row-name">{record.name}</span>
+                  {record.isCurrentUser && (
+                    <span className="ranking-row-me-tag">내 기록</span>
+                  )}
+                </span>
+                <span
+                  className={[
+                    'ranking-row-arrest',
+                    record.criminalCaught ? 'ranking-row-arrest--success' : 'ranking-row-arrest--failed',
+                  ].join(' ')}
+                >
+                  {record.criminalCaught ? '검거 성공' : '검거 실패'}
+                </span>
                 <span className="ranking-row-time">
                   {formatPlayTime(record.playTime)}
                 </span>
