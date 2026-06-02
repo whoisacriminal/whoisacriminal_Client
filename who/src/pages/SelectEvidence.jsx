@@ -154,10 +154,10 @@ export default function SelectEvidence() {
       {/* 상단 타이틀 */}
       <div className="se-title">{selectedCharacter.name}의 책상</div>
 
-      {/* 뒤로가기 */}
+      {/* 뒤로가기
       <button className="se-back-btn" onClick={finishEvidence} aria-label="다음으로 가기">
         ←
-      </button>
+      </button> */}
 
       {/* 증거 캐러셀 영역 */}
       {evidences.length > 0 ? (
