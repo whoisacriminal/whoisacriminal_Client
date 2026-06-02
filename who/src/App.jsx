@@ -22,6 +22,7 @@ import Ending4 from './pages/Ending4'
 import Ending5 from './pages/Ending5'
 import Ending6 from './pages/Ending6'
 import Ranking from './pages/Ranking'
+import MostSuspected from './pages/MostSuspected'
 import TeacherDialogue1 from './pages/TeacherDialogue1'
 import TeacherDialogue2 from './pages/TeacherDialogue2'
 import CaseIntro from './pages/CaseIntro'
@@ -56,6 +57,7 @@ function App() {
         <Route path="/ending5" element={<Ending5 />} />
         <Route path="/ending6" element={<Ending6 />} />
         <Route path="/ranking" element={<Ranking />} />
+        <Route path="/mostsuspected" element={<MostSuspected />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
