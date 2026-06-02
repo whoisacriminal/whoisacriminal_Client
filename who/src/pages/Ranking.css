@@ -222,7 +222,7 @@
 .ranking-rank-stamp {
   display: inline-block;
   align-self: flex-start;
-  margin-bottom: clamp(14px, 2.5vh, 20px);
+  margin-bottom: 10px;
   padding: 4px 13px 3px;
   border: 1px solid rgba(200, 188, 138, 0.42);
   color: rgba(208, 197, 150, 0.68);
@@ -235,6 +235,32 @@
 @keyframes stampReveal {
   from { opacity: 0; transform: rotate(-1.2deg) scale(0.9); }
   to   { opacity: 1; transform: rotate(-1.2deg) scale(1); }
+}
+
+.ranking-arrest-stamp {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: clamp(14px, 2.5vh, 20px);
+  padding: 6px 14px 5px;
+  border: 1px solid rgba(218, 210, 175, 0.34);
+  color: rgba(237, 229, 200, 0.74);
+  font-size: clamp(0.82rem, 1.08vw, 0.98rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: stampReveal 400ms 1280ms ease forwards;
+}
+
+.ranking-arrest-stamp--success {
+  border-color: rgba(195, 230, 205, 0.46);
+  color: rgba(206, 244, 215, 0.86);
+  background: rgba(78, 142, 100, 0.1);
+}
+
+.ranking-arrest-stamp--failed {
+  border-color: rgba(230, 190, 174, 0.42);
+  color: rgba(238, 197, 180, 0.82);
+  background: rgba(150, 68, 52, 0.1);
 }
 
 /* 카드 하단 메타 */
@@ -323,10 +349,10 @@
 
 .ranking-row {
   display: grid;
-  grid-template-columns: 46px 1fr auto auto;
+  grid-template-columns: 46px minmax(150px, 1fr) 76px 92px;
   align-items: center;
-  gap: 14px;
-  padding: 12px 2px;
+  column-gap: 16px;
+  padding: 12px 14px 12px 2px;
   border-bottom: 1px solid rgba(238, 232, 204, 0.12);
   opacity: 0;
   transform: translateY(8px);
@@ -349,7 +375,8 @@
 
 /* 1등 행 — 미세하게 더 밝게 */
 .ranking-row--first .ranking-row-name,
-.ranking-row--first .ranking-row-time {
+.ranking-row--first .ranking-row-time,
+.ranking-row--first .ranking-row-arrest {
   color: rgba(255, 252, 224, 0.96);
 }
 
@@ -375,6 +402,13 @@
 
 .ranking-row--first .ranking-row-num { color: rgba(218, 210, 175, 0.72); }
 .ranking-row--me    .ranking-row-num { color: rgba(218, 210, 175, 0.58); }
+
+.ranking-row-main {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
 
 /* 이름 */
 .ranking-row-name {
@@ -402,8 +436,39 @@
   white-space: nowrap;
 }
 
+.ranking-row-arrest {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 76px;
+  padding: 4px 8px 3px;
+  border: 1px solid rgba(218, 210, 175, 0.22);
+  color: rgba(218, 210, 175, 0.58);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ranking-row-arrest--success {
+  border-color: rgba(195, 230, 205, 0.28);
+  color: rgba(195, 230, 205, 0.7);
+  background: rgba(78, 142, 100, 0.08);
+}
+
+.ranking-row-arrest--failed {
+  border-color: rgba(230, 190, 174, 0.24);
+  color: rgba(238, 197, 180, 0.64);
+  background: rgba(150, 68, 52, 0.08);
+}
+
+.ranking-row--me .ranking-row-arrest {
+  border-color: rgba(218, 210, 175, 0.36);
+}
+
 /* 시간 */
 .ranking-row-time {
+  width: 92px;
   color: rgba(218, 210, 175, 0.58);
   font-size: clamp(0.88rem, 1.3vw, 1.15rem);
   line-height: 1.2;
@@ -544,16 +609,27 @@
     padding-inline: 14px;
   }
 
+  .ranking-board-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ranking-board-title {
+    width: 100%;
+    font-size: 1.55rem;
+    text-align: left;
+  }
+
   /* 모바일: 순위 + 이름 / 시간 2줄 레이아웃 */
   .ranking-row {
     grid-template-columns: 38px 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     gap: 3px 10px;
     padding-block: 11px;
   }
 
   .ranking-row-num {
-    grid-row: 1 / 3;
+    grid-row: 1 / 4;
     align-self: center;
     font-size: 1.3rem;
   }
@@ -562,14 +638,29 @@
     align-self: end;
   }
 
+  .ranking-row-main {
+    grid-column: 2;
+    align-self: end;
+  }
+
   .ranking-row-me-tag {
     display: none;
+  }
+
+  .ranking-row-arrest {
+    grid-column: 2;
+    justify-self: start;
+    align-self: start;
+    width: auto;
+    margin-top: 4px;
+    font-size: 0.72rem;
   }
 
   .ranking-row-time {
     grid-column: 2;
     justify-self: start;
     align-self: start;
+    width: auto;
     color: rgba(218, 210, 175, 0.44);
     font-size: 0.8rem;
   }

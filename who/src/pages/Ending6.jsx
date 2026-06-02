@@ -4,6 +4,20 @@ import './Ending.css'
 import endingImage from '../assets/ending/ending6.png'
 
 export default function Ending6() {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        window.location.href = '/mostsuspected'
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   const navigate = useNavigate()
 
   useEffect(() => {

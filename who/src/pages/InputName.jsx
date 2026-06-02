@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './InputName.css'
 import NoirButton from '../components/NoirButton'
 import bgMain from '../assets/start/bg-main.png'
+import { setGameStartTime, clearRankSaved } from '../utils/api'
 
 const TITLE_LINES = [
   '당신은 사건을 조사하는 탐정입니다.',
@@ -74,6 +75,10 @@ export default function InputName() {
     const detectiveName = name.trim()
     if (!detectiveName) return false
     window.localStorage.setItem('detectiveName', detectiveName)
+    // 이전 랭킹 저장 플래그 초기화
+    clearRankSaved(detectiveName)
+    // 게임 시작 시간 저장
+    setGameStartTime()
     return true
   }
 
