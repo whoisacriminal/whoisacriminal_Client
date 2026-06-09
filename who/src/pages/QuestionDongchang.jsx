@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './QuestionDongchang.css'
+import EnterHint from '../components/EnterHint'
 import bgBlackboard from '../assets/background/bg-blackboard.png'
 import handcuffs from '../assets/start/handcuffs.png'
 import fileBoard from '../assets/question/file.png'
@@ -95,6 +96,7 @@ export default function QuestionDongchang() {
           </article>
         </div>
       </section>
+      <EnterHint />
     </main>
   )
 }

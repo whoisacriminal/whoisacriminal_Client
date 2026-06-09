@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Ending.css'
+import EnterHint from '../components/EnterHint'
 import endingImage from '../assets/ending/ending4.png'
 
 export default function Ending4() {
@@ -36,6 +37,7 @@ export default function Ending4() {
         <br />
         키보드로 내리쳤고, 쓰러진 후에도 무자비하게 폭행했다.
       </p>
+      <EnterHint />
     </main>
   )
 }

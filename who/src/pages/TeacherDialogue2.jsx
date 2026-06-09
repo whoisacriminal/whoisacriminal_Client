@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './TeacherDialogue2.css'
+import EnterHint from '../components/EnterHint'
 import classroomBg from '../assets/background/bg-yirea.png'
 
 const FULL_TEXT = '김이레.....? 이게 무슨 일이야......'
@@ -90,6 +91,7 @@ export default function TeacherDialogue() {
           )}
         </p>
       </section>
+      <EnterHint />
     </main>
   )
 }

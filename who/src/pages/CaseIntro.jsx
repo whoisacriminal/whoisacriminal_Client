@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CaseIntro.css'
+import EnterHint from '../components/EnterHint'
 import paperBg from '../assets/background/bg-paper.png'
 import coffeeStain from '../assets/background/coffee-stain.png'
 import coffeeCircle from '../assets/background/coffee-circle.png'
@@ -122,6 +123,7 @@ export default function CaseIntro() {
           )
         })}
       </section>
+      <EnterHint />
     </main>
   )
 }

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SuspectBoard.css";
+import EnterHint from "../components/EnterHint";
 import dongchang from "../assets/suspect/dongchang.png";
 import sarang from "../assets/suspect/sarang.png";
 import teamwon from "../assets/suspect/teamwon.png";
@@ -113,6 +114,7 @@ export default function SuspectBoard() {
           <SuspectCard key={`${suspect.name}-${index}`} suspect={suspect} />
         ))}
       </div>
+      <EnterHint />
     </section>
   );
 }

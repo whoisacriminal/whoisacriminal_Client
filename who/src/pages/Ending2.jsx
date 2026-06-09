@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Ending.css'
+import EnterHint from '../components/EnterHint'
 import endingImage from '../assets/ending/ending2.png'
 
 export default function Ending2() {
@@ -36,6 +37,7 @@ export default function Ending2() {
         <br />
         돌아온 조동창은 홀로 남아 작업 중이던 김이레와 마주쳤다.
       </p>
+      <EnterHint />
     </main>
   )
 }

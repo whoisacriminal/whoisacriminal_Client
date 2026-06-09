@@ -1,0 +1,18 @@
+.enter-hint {
+  position: fixed;
+  right: clamp(18px, 3vw, 42px);
+  bottom: clamp(18px, 3vh, 34px);
+  z-index: 1000;
+  margin: 0;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.58);
+  color: #f5f0e8;
+  font-family: 'Joseon100Years', 'Malgun Gothic', serif;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  user-select: none;
+}

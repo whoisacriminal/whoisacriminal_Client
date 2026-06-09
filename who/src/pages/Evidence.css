@@ -118,7 +118,7 @@
   width: clamp(72px, 8.8%, 120px);
   user-select: none;
   -webkit-user-drag: none;
-  cursor: pointer;
+  cursor: default;
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.28));
 }
 
