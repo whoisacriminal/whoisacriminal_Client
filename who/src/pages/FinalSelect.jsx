@@ -7,6 +7,8 @@ import sarang from '../assets/suspect/sarang.png'
 import teamwon from '../assets/suspect/teamwon.png'
 import yideung from '../assets/suspect/yideung.png'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { createRanking, getGamePlayTime, markRankSaved, clearGameStartTime, isRankSaved } from '../utils/api'
 
 const SUSPECTS = [
   { id: 'jo', name: '조동창', image: dongchang },
@@ -17,10 +19,35 @@ const SUSPECTS = [
 
 export default function FinalSelect() {
   const navigate = useNavigate()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  function handleSelect(id) {
+  async function handleSelect(id) {
+    if (isSubmitting) return
+    setIsSubmitting(true)
+
     const isCorrect = id === 'jo'
+    const detectiveName = window.localStorage.getItem('detectiveName') || '익명의 탐정'
+    const suspect = SUSPECTS.find((suspectData) => suspectData.id === id)
+    const playTime = getGamePlayTime()
+
     window.localStorage.setItem('criminalCaught', String(isCorrect))
+
+    if (!isRankSaved(detectiveName)) {
+      try {
+        await createRanking({
+          name: detectiveName,
+          playTime,
+          criminalCaught: isCorrect,
+          suspectId: suspect?.id,
+          suspectName: suspect?.name,
+        })
+        markRankSaved(detectiveName)
+      } catch (error) {
+        console.error('랭킹 저장 중 오류 발생:', error)
+      }
+    }
+
+    clearGameStartTime()
 
     if (isCorrect) {
       navigate('/missioncompleted')

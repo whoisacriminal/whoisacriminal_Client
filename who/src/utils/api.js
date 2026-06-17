@@ -2,7 +2,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 
 // 새 랭킹 기록 생성
-export async function createRanking(name, playTime) {
+export async function createRanking({ name, playTime, criminalCaught, suspectId, suspectName }) {
   try {
     const response = await fetch(`${API_BASE_URL}/rankings`, {
       method: 'POST',
@@ -12,6 +12,9 @@ export async function createRanking(name, playTime) {
       body: JSON.stringify({
         name: name.trim(),
         playTime: Math.round(playTime),
+        criminalCaught: criminalCaught ? true : false,
+        suspectId: suspectId || null,
+        suspectName: suspectName || null,
       }),
     })
 
@@ -61,6 +64,22 @@ export async function fetchUserRanking(name) {
   }
 }
 
+// 최다 지목 통계 조회
+export async function fetchMostSuspected() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/mostsuspected`)
+
+    if (!response.ok) {
+      throw new Error(`API 에러: ${response.status}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('지목 통계 조회 실패:', error)
+    throw error
+  }
+}
+
 // 게임 시작 시간 저장
 export function setGameStartTime() {
   const startTime = Date.now()
@@ -72,6 +91,16 @@ export function setGameStartTime() {
 export function clearRankSaved(name) {
   if (!name) return
   sessionStorage.removeItem(`rankSaved:${name}`)
+}
+
+export function markRankSaved(name) {
+  if (!name) return
+  sessionStorage.setItem(`rankSaved:${name}`, 'true')
+}
+
+export function isRankSaved(name) {
+  if (!name) return false
+  return sessionStorage.getItem(`rankSaved:${name}`) === 'true'
 }
 
 // 게임 플레이 시간(초) 계산
